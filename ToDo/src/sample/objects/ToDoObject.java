@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class ToDoObject {
 
+    //---- [Variables] ----
     public Importance importance;
     public Category category;
     public String title;
@@ -18,6 +19,7 @@ public class ToDoObject {
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); // ezt máshol felhasználhatjuk!
 
+    //---- [CONSTRUCTORS] ----
     public ToDoObject()
     {
         this.title = "NO TITLE";
