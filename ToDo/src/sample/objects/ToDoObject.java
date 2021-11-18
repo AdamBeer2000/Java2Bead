@@ -29,14 +29,25 @@ public class ToDoObject
         this.start_date = new Date();
         this.is_finished = false;
     }
-
-    public ToDoObject(String in_title, String in_description, Date in_deadline, Category in_category, Importance in_importance)
+    public ToDoObject(String in_title, String in_description, Category in_category, Importance in_importance)
     {
         this.title = in_title;
         this.description = in_description;
         this.category = in_category;
         this.importance = in_importance;
-        this.start_date = new Date();
+
+        this.start_date = null;
+        this.deadline = null;
+
+        this.is_finished = false;
+    }
+    public ToDoObject(String in_title, String in_description,Date start_date, Date in_deadline, Category in_category, Importance in_importance)
+    {
+        this.title = in_title;
+        this.description = in_description;
+        this.category = in_category;
+        this.importance = in_importance;
+        this.start_date = start_date;
         this.deadline = in_deadline;
         this.is_finished = false;
     }
