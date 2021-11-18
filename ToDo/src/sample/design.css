@@ -1,0 +1,12 @@
+#addTodo
+{
+    -fx-font-size: 20;
+    -fx-background-color: #333333;
+    -fx-text-fill: #888888;
+    -fx-font-weight: bold;
+}
+
+.root
+{
+    -fx-background-color: #666666;
+}
