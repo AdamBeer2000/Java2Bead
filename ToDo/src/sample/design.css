@@ -6,6 +6,11 @@
     -fx-font-weight: bold;
 }
 
+#addPanel
+{
+    -fx-background-color: #666666;
+}
+
 .root
 {
     -fx-background-color: #666666;

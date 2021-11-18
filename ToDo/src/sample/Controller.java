@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 public class Controller {
 
@@ -24,6 +25,9 @@ public class Controller {
 
     @FXML
     private Button addTodo;
+
+    @FXML
+    private Pane addPane;
 
     @FXML
     void mainAddButton_Click(ActionEvent event) {
