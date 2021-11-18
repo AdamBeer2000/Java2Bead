@@ -39,9 +39,8 @@ public class Controller {
     }
 
     @FXML
-    void mainContextDelete_DeleteTodo(ActionEvent event) {
+    void mainMenuDelete_OnClick(ActionEvent event) {
         int selectedItem = mainList.getSelectionModel().getSelectedIndex();
-        System.out.println(selectedItem);
         mainList.getItems().remove(selectedItem);
     }
 }
