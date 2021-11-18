@@ -23,6 +23,9 @@ public class Controller {
     private Button mainAddButton;
 
     @FXML
+    private Button addTodo;
+
+    @FXML
     void mainAddButton_Click(ActionEvent event) {
         if(!mainInput.getText().isEmpty())
         {
