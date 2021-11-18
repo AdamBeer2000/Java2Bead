@@ -6,7 +6,8 @@ import sample.enums.Importance;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ToDoObject {
+public class ToDoObject
+{
 
     //---- [Variables] ----
     public Importance importance;
