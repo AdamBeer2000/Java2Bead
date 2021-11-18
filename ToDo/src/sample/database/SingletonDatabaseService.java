@@ -190,6 +190,7 @@ public class SingletonDatabaseService
         String query=
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
                         " FROM todotable" + " WHERE ownerid="+userid+" and importanceid="+cat.ToInt();
+
         System.out.println(query);
         Statement stmt= conn.createStatement();
 
@@ -226,7 +227,14 @@ public class SingletonDatabaseService
     //lekéri az összes todoját egy usernek két időpont között
     public ArrayList<ToDoObject> getAllTodoByUserIdBetween(int userid, Date dateOne, Date dateTwo)throws SQLException
     {
-
         return new ArrayList<ToDoObject>();
+    }
+
+    public void deleteTodoById(int id)throws SQLException
+    {
+        String query="DELETE from todotable where todoid="+id;
+        Connection conn =getConnection();
+        Statement stmt=conn.createStatement();
+        stmt.execute(query);
     }
 }
