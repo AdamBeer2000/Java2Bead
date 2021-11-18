@@ -35,7 +35,7 @@ public class Main extends Application {
         try
         {
             ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserId(0);
-            sds.deleteTodoById(8);
+
             for(ToDoObject td:tdslist)
             {
                 System.out.println(td.title);
