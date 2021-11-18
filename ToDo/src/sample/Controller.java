@@ -15,16 +15,19 @@ public class Controller {
     private VBox defaultVBox;
 
     @FXML
+    private Pane loginPane;
+
+    @FXML
     private Pane bannerPane;
+
+    @FXML
+    private Pane addPane;
 
     @FXML
     private ListView<String> mainList;
 
     @FXML
     private Button addTodo;
-
-    @FXML
-    private Pane addPane;
 
     @FXML
     private TextField taskName;
@@ -66,5 +69,19 @@ public class Controller {
 
         taskName.setText("");
         description.setText("");
+    }
+
+    public void loginButtonEvent(MouseEvent mouseEvent) {
+        loginPane.setVisible(false);
+        loginPane.setDisable(true);
+        defaultVBox.setDisable(false);
+        defaultVBox.setVisible(true);
+    }
+
+    public void signinButtonEvent(MouseEvent mouseEvent) {
+        loginPane.setVisible(false);
+        loginPane.setDisable(true);
+        defaultVBox.setDisable(false);
+        defaultVBox.setVisible(true);
     }
 }
