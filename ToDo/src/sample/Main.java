@@ -34,8 +34,6 @@ public class Main extends Application {
     {
         try
         {
-            sds.modifyTodo(8, new ToDoObject(8,"vandatum","felírás", Category.PLANNED,Importance.IMPORTANT));
-
             ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserId(0);
 
             for(ToDoObject td:tdslist)
