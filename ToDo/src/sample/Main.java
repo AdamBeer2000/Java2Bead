@@ -40,9 +40,7 @@ public class Main extends Application {
             {
                 System.out.println(td.title);
             }
-
             launch(args);
-
         }
         catch (Exception e)
         {

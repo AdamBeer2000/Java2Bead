@@ -237,4 +237,40 @@ public class SingletonDatabaseService
         Statement stmt=conn.createStatement();
         stmt.execute(query);
     }
+
+    public void addUser(String username,String password)throws SQLException
+    {
+        Connection conn=getConnection();
+
+        String query="INSERT INTO users(username,password) VALUES(?,?)";
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.setString(1,username);
+        stmt.setString(2,password);
+
+        stmt.executeUpdate();
+
+
+    }
+    public int loggUser(String username,String password) throws Exception
+    {
+        Connection conn=getConnection();
+
+        String query="SELECT id FROM users where username=? and password=?";
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.setString(1,username);
+        stmt.setString(2,password);
+
+        ResultSet rs= stmt.executeQuery();
+
+        if(rs.next())
+        {
+            return rs.getInt("id");
+        }
+        else
+        {
+            throw new Exception("Failed to login wrong password");
+        }
+    }
 }
