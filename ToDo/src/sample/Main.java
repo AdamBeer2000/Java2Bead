@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class Main extends Application {
 
-    //private static SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+    private static SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -31,7 +31,7 @@ public class Main extends Application {
     public static void main(String[] args)
     {
         try
-        {/*
+        {
             ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserIdAndImportance(0, Importance.NOT_IMPORTANT);
 
             ToDoObject ntd=new ToDoObject("nincsdatum","leiras",Category.UNFINISHED,Importance.IMPORTANT);
@@ -44,7 +44,7 @@ public class Main extends Application {
             {
                 System.out.println(td.title);
             }
-            */
+
             launch(args);
 
         }
