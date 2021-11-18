@@ -30,8 +30,8 @@ public class Main extends Application {
 
     public static void main(String[] args)
     {
-        /*try
-        {
+        try
+        {/*
             ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserIdAndImportance(0, Importance.NOT_IMPORTANT);
 
             ToDoObject ntd=new ToDoObject("nincsdatum","leiras",Category.UNFINISHED,Importance.IMPORTANT);
@@ -44,12 +44,13 @@ public class Main extends Application {
             {
                 System.out.println(td.title);
             }
-
+            */
             launch(args);
+
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-        }*/
+        }
     }
 }
