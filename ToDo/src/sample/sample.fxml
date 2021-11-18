@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <MenuBar>
         <menus>
@@ -32,20 +32,27 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="mainList" prefHeight="600.0" prefWidth="800.0">
-         <contextMenu>
-            <ContextMenu>
-              <items>
-                <MenuItem fx:id="mainContextDelete" mnemonicParsing="false" onAction="#mainContextDelete_DeleteTodo" text="Delete" />
-              </items>
-            </ContextMenu>
-         </contextMenu>
-      </ListView>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Pane prefHeight="615.0" prefWidth="1280.0">
          <children>
-            <TextField fx:id="mainInput" />
-            <Button fx:id="mainAddButton" mnemonicParsing="false" onAction="#mainAddButton_Click" text="Add TODO" />
+            <Pane prefHeight="605.0" prefWidth="300.0" />
+            <Pane layoutX="300.0" prefHeight="605.0" prefWidth="680.0">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="605.0" prefWidth="680.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="980.0" prefHeight="605.0" prefWidth="300.0" />
          </children>
-      </HBox>
+      </Pane>
+      <Pane prefHeight="100.0" prefWidth="1280.0">
+         <children>
+            <Line endX="1280.0" />
+            <HBox prefHeight="100.0" prefWidth="1280.0">
+               <children>
+                  <TextField fx:id="mainInput" />
+                  <Button fx:id="mainAddButton" mnemonicParsing="false" onAction="#mainAddButton_Click" text="Add TODO" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
    </children>
 </VBox>
