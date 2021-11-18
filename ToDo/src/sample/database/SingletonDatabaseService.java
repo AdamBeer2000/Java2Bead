@@ -215,6 +215,7 @@ public class SingletonDatabaseService
             boolean is_finished=rs.getBoolean("finished");
 
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+
         }
 
         getConnection().close();
