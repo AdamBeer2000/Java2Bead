@@ -1,7 +1,44 @@
-#addTodo, #addAddButton, #cancelAddButton
+.button
 {
     -fx-background-color: #333333;
     -fx-text-fill: #888888;
+}
+
+#menuBar
+{
+    -fx-background-color: #888888;
+    -fx-text-fill: #DDDDDD;
+}
+
+.menu .label
+{
+    -fx-text-fill: #DDDDDD;
+    -fx-padding: 0.0em 0.0em 0.0em 0.0em;
+}
+
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing
+{
+    -fx-background: #333333;
+    -fx-opacity: 0.5;
+    -fx-text-fill: #DDDDDD;
+}
+
+.context-menu:hover
+{
+    -fx-background: #333333;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #FFFFFF;
+}
+
+.context-menu
+{
+    -fx-background-color: #888888;
+    -fx-border-color: #777777;
+}
+
+.menu .menu-item
+{
+    -fx-background-color: #888888;
 }
 
 #taskText, #descriptionText, #deadlineText
@@ -9,9 +46,41 @@
     -fx-text-fill: #888888;
 }
 
+.text-field
+{
+    -fx-background-color: #888888;
+    -fx-text-fill: #DDDDDD;
+}
+
+.text-area {
+    text-area-background: #888888;
+    -fx-text-fill: #DDDDDD;
+    -fx-border-color: #888888;
+    -fx-font-size: 18px
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
+#bannerPane
+{
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+}
+
+#mainList
+{
+    -fx-background-color: #777777;
+}
+
 #addPane
 {
     -fx-background-color: #555555;
+}
+
+.date-picker
+{
+    -fx-font-size: 18px
 }
 
 .root

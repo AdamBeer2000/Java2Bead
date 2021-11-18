@@ -15,12 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <VBox fx:id="defaultVBox" layoutX="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <MenuBar>
+            <MenuBar fx:id="menuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -29,7 +28,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="mainMenuDelete" mnemonicParsing="false" onAction="#mainMenuDelete_OnClick" text="Delete" />
+                    <MenuItem fx:id="mainMenuDelete" mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -44,7 +43,9 @@
                   <Pane prefHeight="605.0" prefWidth="300.0" />
                   <Pane layoutX="300.0" prefHeight="605.0" prefWidth="680.0">
                      <children>
-                        <ListView fx:id="mainList" prefHeight="605.0" prefWidth="680.0" />
+                        <ListView fx:id="mainList" layoutY="1.0" prefHeight="603.0" prefWidth="680.0" />
+                        <Line endY="604.0" startY="2.0" stroke="#3c3c3c" strokeWidth="3.0" />
+                        <Line endX="680.0" endY="604.0" startX="680.0" startY="2.0" stroke="#3c3c3c" strokeWidth="3.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="980.0" prefHeight="605.0" prefWidth="300.0" />
@@ -52,9 +53,9 @@
             </Pane>
             <Pane prefHeight="100.0" prefWidth="1280.0">
                <children>
-                  <Line endX="1280.0" />
+                  <Line endX="1280.0" stroke="#3c3c3c" strokeWidth="3.0" />
                   <HBox prefHeight="100.0" prefWidth="979.0" />
-                  <Button fx:id="addTodo" layoutX="1109.0" layoutY="11.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="157.0" text="ADD +">
+                  <Button fx:id="addTodo" layoutX="1109.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#addPaneButtonEvent" prefHeight="69.0" prefWidth="157.0" text="ADD +">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -63,32 +64,36 @@
             </Pane>
          </children>
       </VBox>
-      <Pane fx:id="addPane" layoutX="290.0" layoutY="135.0" prefHeight="450.0" prefWidth="700.0">
+      <Pane fx:id="bannerPane" disable="true" layoutY="24.0" prefHeight="696.0" prefWidth="1280.0" visible="false" />
+      <Pane fx:id="addPane" disable="true" layoutX="290.0" layoutY="135.0" prefHeight="450.0" prefWidth="700.0" visible="false">
          <children>
-            <TextField fx:id="TaskName" layoutX="20.0" layoutY="64.0" prefHeight="53.0" prefWidth="533.0" />
-            <Button fx:id="addAddButton" layoutX="567.0" layoutY="64.0" mnemonicParsing="false" onAction="#mainAddButton_Click" prefHeight="53.0" prefWidth="119.0" text="Add">
+            <TextField fx:id="taskName" layoutX="20.0" layoutY="64.0" prefHeight="53.0" prefWidth="533.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <Button fx:id="addAddButton" layoutX="567.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#addTodoButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Add">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Text fx:id="taskText" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task">
+            <Text fx:id="taskText" fill="#dddddd" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task">
                <font>
                   <Font size="39.0" />
                </font>
             </Text>
-            <Text fx:id="descriptionText" layoutX="20.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+            <Text fx:id="descriptionText" fill="#dddddd" layoutX="20.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <TextArea fx:id="description" layoutX="20.0" layoutY="158.0" prefHeight="164.0" prefWidth="300.0" />
-            <DatePicker fx:id="deadlinePicker" layoutX="373.0" layoutY="158.0" prefHeight="45.0" prefWidth="310.0" />
-            <Text fx:id="deadlineText" layoutX="373.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline">
+            <TextArea fx:id="description" layoutX="20.0" layoutY="158.0" prefHeight="164.0" prefWidth="300.0" wrapText="true" />
+            <DatePicker fx:id="deadlinePicker" layoutX="373.0" layoutY="158.0" prefHeight="45.0" prefWidth="310.0" showWeekNumbers="true" />
+            <Text fx:id="deadlineText" fill="#dddddd" layoutX="373.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Button fx:id="cancelAddButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onAction="#mainAddButton_Click" prefHeight="53.0" prefWidth="119.0" text="Cancel">
+            <Button fx:id="cancelAddButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#cancelAddTodoButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Cancel">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
