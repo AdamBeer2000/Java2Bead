@@ -82,6 +82,23 @@ public class SingletonDatabaseService
     //egy todoobijektumot módosít az adatbázisban
     public void modifyTodo(int todoId,ToDoObject modifiedTodo)throws SQLException
     {
+        Connection conn =getConnection();
+
+        String query="UPDATE todotable " +
+                "SET title=?,importanceid=?,categoryid=?,description=?,finished=? "+
+                "WHERE todoId="+todoId;
+
+        System.out.println(query);
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+
+        stmt.setString(1,modifiedTodo.title);
+        stmt.setInt(2,modifiedTodo.importance.ToInt());
+        stmt.setInt(3,modifiedTodo.category.ToInt());
+        stmt.setString(4,modifiedTodo.description);
+        stmt.setBoolean(5,modifiedTodo.is_finished);
+
+        stmt.executeUpdate();
 
     }
 
@@ -98,23 +115,25 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery(query);
         while (rs.next())
         {
-             Importance importance;
-             int impid=rs.getInt("importanceid");
-             importance=Importance.IntToImportance(impid);
+            int todoId=rs.getInt("todoid");
 
-             Category category;
-             int catid=rs.getInt("categoryid");
-             category=Category.IntToCategory(catid);
+            Importance importance;
+            int impid=rs.getInt("importanceid");
+            importance=Importance.IntToImportance(impid);
 
-             String title=rs.getString("title");
-             String description=rs.getString("description");
+            Category category;
+            int catid=rs.getInt("categoryid");
+            category=Category.IntToCategory(catid);
 
-             java.util.Date deadline=rs.getDate("deadline");
-             java.util.Date start_date=rs.getDate("start_date");
+            String title=rs.getString("title");
+            String description=rs.getString("description");
 
-             boolean is_finished=rs.getBoolean("finished");
+            java.util.Date deadline=rs.getDate("deadline");
+            java.util.Date start_date=rs.getDate("start_date");
 
-            ret.add(new ToDoObject(title,description,start_date,deadline,category,importance));
+            boolean is_finished=rs.getBoolean("finished");
+
+            ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance));
         }
 
         getConnection().close();
@@ -137,6 +156,8 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery(query);
         while (rs.next())
         {
+            int todoId=rs.getInt("todoid");
+
             Importance importance;
             int impid=rs.getInt("importanceid");
             importance=Importance.IntToImportance(impid);
@@ -153,7 +174,7 @@ public class SingletonDatabaseService
 
             boolean is_finished=rs.getBoolean("finished");
 
-            ret.add(new ToDoObject(title,description,start_date,deadline,category,importance));
+            ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance));
         }
 
         getConnection().close();
@@ -175,6 +196,8 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery(query);
         while (rs.next())
         {
+            int todoId=rs.getInt("todoid");
+
             Importance importance;
             int impid=rs.getInt("importanceid");
             importance=Importance.IntToImportance(impid);
@@ -191,7 +214,7 @@ public class SingletonDatabaseService
 
             boolean is_finished=rs.getBoolean("finished");
 
-            ret.add(new ToDoObject(title,description,start_date,deadline,category,importance));
+            ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance));
         }
 
         getConnection().close();

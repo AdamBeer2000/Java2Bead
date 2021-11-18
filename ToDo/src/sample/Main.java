@@ -34,13 +34,9 @@ public class Main extends Application {
     {
         try
         {
-            ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserIdAndImportance(0, Importance.NOT_IMPORTANT);
+            sds.modifyTodo(8, new ToDoObject(8,"vandatum","felírás", Category.PLANNED,Importance.IMPORTANT));
 
-            ToDoObject ntd=new ToDoObject("nincsdatum","leiras",Category.UNFINISHED,Importance.IMPORTANT);
-            ToDoObject ntd2=new ToDoObject("nincsdatum","leiras",new Date(),new Date(),Category.UNFINISHED,Importance.IMPORTANT);;
-
-            sds.addTodoToUser(0,ntd);
-            sds.addTodoToUser(0,ntd2);
+            ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserId(0);
 
             for(ToDoObject td:tdslist)
             {

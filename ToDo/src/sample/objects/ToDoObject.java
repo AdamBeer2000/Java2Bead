@@ -29,7 +29,7 @@ public class ToDoObject
         this.start_date = new Date();
         this.is_finished = false;
     }
-    public ToDoObject(String in_title, String in_description, Category in_category, Importance in_importance)
+    public ToDoObject(int todoId,String in_title, String in_description, Category in_category, Importance in_importance)
     {
         this.title = in_title;
         this.description = in_description;
@@ -41,7 +41,7 @@ public class ToDoObject
 
         this.is_finished = false;
     }
-    public ToDoObject(String in_title, String in_description,Date start_date, Date in_deadline, Category in_category, Importance in_importance)
+    public ToDoObject(int todoid,String in_title, String in_description,Date start_date, Date in_deadline, Category in_category, Importance in_importance)
     {
         this.title = in_title;
         this.description = in_description;
