@@ -3,6 +3,7 @@ package sample.database;
 import sample.enums.Category;
 import sample.enums.Importance;
 import sample.objects.ToDoObject;
+import sample.users.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -252,7 +253,7 @@ public class SingletonDatabaseService
 
 
     }
-    public int loggUser(String username,String password) throws Exception
+    public User getUser(String username, String password) throws Exception
     {
         Connection conn=getConnection();
 
@@ -266,11 +267,31 @@ public class SingletonDatabaseService
 
         if(rs.next())
         {
-            return rs.getInt("id");
+            return new User(username,rs.getInt("id"));
         }
         else
         {
-            throw new Exception("Failed to login wrong password");
+            throw new Exception("No user with name/password:"+username+","+password);
+        }
+    }
+    public User getUser(String username) throws Exception
+    {
+        Connection conn=getConnection();
+
+        String query="SELECT id FROM users where username=?";
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.setString(1,username);
+
+        ResultSet rs= stmt.executeQuery();
+
+        if(rs.next())
+        {
+            return new User(username,rs.getInt("id"));
+        }
+        else
+        {
+            throw new Exception("No user with name:"+username);
         }
     }
 }
