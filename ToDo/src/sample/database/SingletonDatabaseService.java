@@ -16,10 +16,10 @@ public class SingletonDatabaseService
 
     public class ServerSettings
     {
-        private final String hostname="localhost";
-        private final String username="root";
-        private final String password="";
-        private final String databaseName="todolistdb";
+        private final String hostname="b4cyzvut6ovomqbnhtk0-mysql.services.clever-cloud.com";
+        private final String username="u1xpyoext1l1e1mj";
+        private final String password="HL9kDWHw5gfpvqqrozBc";
+        private final String databaseName="b4cyzvut6ovomqbnhtk0";
         private final int port=3306;
         public ServerSettings() {}
     }
