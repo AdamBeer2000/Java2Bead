@@ -75,6 +75,9 @@ public class Controller {
     private Pane signinEmailPN;
 
     @FXML
+    private DatePicker deadlinePicker;
+
+    @FXML
     private Text clock;
 
     /*@FXML
