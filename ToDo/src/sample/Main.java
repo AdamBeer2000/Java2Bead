@@ -22,10 +22,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("TODO");
+        primaryStage.setTitle("ToDo");
         Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -34,13 +35,21 @@ public class Main extends Application {
     {
         try
         {
-            ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserId(0);
+            ArrayList<ToDoObject> tdslist= sds.getAllTodoByUserIdAndImportance(0, Importance.NOT_IMPORTANT);
+
+            ToDoObject ntd=new ToDoObject("nincsdatum","leiras",Category.UNFINISHED,Importance.IMPORTANT);
+            ToDoObject ntd2=new ToDoObject("nincsdatum","leiras",new Date(),new Date(),Category.UNFINISHED,Importance.IMPORTANT);;
+
+            sds.addTodoToUser(0,ntd);
+            sds.addTodoToUser(0,ntd2);
 
             for(ToDoObject td:tdslist)
             {
                 System.out.println(td.title);
             }
+
             launch(args);
+
         }
         catch (Exception e)
         {
