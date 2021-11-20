@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import sample.database.SingletonDatabaseService;
+import sample.users.SingletonLoggedUserManager;
 
 import java.time.LocalTime;
 import java.util.regex.Matcher;
@@ -134,18 +136,41 @@ public class Controller {
 
     public void loginButtonEvent(MouseEvent mouseEvent)
     {
-        loginPane.setVisible(false);
-        loginPane.setDisable(true);
-        defaultVBox.setDisable(false);
-        defaultVBox.setVisible(true);
+        SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+        if(loginUsername.getText().isEmpty()||loginPassword.getText().isEmpty())
+        {
+            //todo kirni hogy üres x
+        }
+        else if(slum.loginUser(loginUsername.getText(),loginPassword.getText()))
+        {
+            loginPane.setVisible(false);
+            loginPane.setDisable(true);
+            defaultVBox.setDisable(false);
+            defaultVBox.setVisible(true);
+        }
+        else
+        {
+            //todo sikertelen bejelentkezés
+        }
     }
 
     public void signinButtonEvent(MouseEvent mouseEvent)
     {
-        loginPane.setVisible(false);
-        loginPane.setDisable(true);
-        defaultVBox.setDisable(false);
-        defaultVBox.setVisible(true);
+        try
+        {
+            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+            sds.addUser(signinUsername.getText(),signinPassword.getText(),signinEmail.getText());
+
+            loginPane.setVisible(false);
+            loginPane.setDisable(true);
+            defaultVBox.setDisable(false);
+            defaultVBox.setVisible(true);
+
+        }catch (Exception e)
+        {
+            //todo fail
+        }
+
     }
 
     public void loginUsernameChangeEvent(KeyEvent keyEvent)

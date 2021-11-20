@@ -239,15 +239,16 @@ public class SingletonDatabaseService
         stmt.execute(query);
     }
 
-    public void addUser(String username,String password)throws SQLException
+    public void addUser(String username,String password,String email)throws SQLException
     {
         Connection conn=getConnection();
 
-        String query="INSERT INTO users(username,password) VALUES(?,?)";
+        String query="INSERT INTO users(username,password,email) VALUES(?,?,?)";
 
         PreparedStatement stmt= conn.prepareStatement(query);
         stmt.setString(1,username);
         stmt.setString(2,password);
+        stmt.setString(3,email);
 
         stmt.executeUpdate();
 
