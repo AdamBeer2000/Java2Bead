@@ -9,12 +9,26 @@ public class SingletonLoggedUserManager
 
     }
 
-    private User instance=null;
+    private static SingletonLoggedUserManager instance;
+    private User loggedUser=null;
+
+    public static SingletonLoggedUserManager getInstance()
+    {
+        if(instance==null)
+        {
+            instance=new SingletonLoggedUserManager();
+            return instance;
+        }
+        else
+        {
+            return instance;
+        }
+    }
 
     public User getLoggedUser()throws Exception
     {
-        if(instance!=null)
-        return this.instance;
+        if(loggedUser!=null)
+        return this.loggedUser;
         else throw new Exception("There is no logged user");
     }
 
@@ -23,7 +37,7 @@ public class SingletonLoggedUserManager
         SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
         try
         {
-            instance=sds.getUser(userName,password);
+            loggedUser=sds.getUser(userName,password);
             return true;
         }catch (Exception e) {
             e.printStackTrace();
@@ -32,11 +46,11 @@ public class SingletonLoggedUserManager
     }
 
     public int getUserid() {
-        return instance.getUserid();
+        return loggedUser.getUserid();
     }
 
     public String getUserName() {
-        return instance.getUserName();
+        return loggedUser.getUserName();
     }
 
 
