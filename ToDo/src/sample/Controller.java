@@ -201,22 +201,15 @@ public class Controller {
         }
     }
 
-    public void signinEmailChangeEvent(KeyEvent keyEvent)
+    public void signinEmailReleaseEvent(KeyEvent keyEvent)
     {
-        // A regex nem működik
-        //^[A-Z0-9+_.-]+@[A-Z0-9.-]+$
-        String emailRegex = "^[A-Z0-9+_.-]+@[A-Z0-9.-]+$";
-        Pattern pattern = Pattern.compile(emailRegex);
-
-        Matcher matcher = pattern.matcher(signinEmail.getText());
-
-        if(!(matcher.matches()))
+        if(signinEmail.getText().contains("@") && signinEmail.getText().contains(".") && signinEmail.getText().length() >= 5)
         {
-            signinEmailPN.setStyle("-fx-background-color: #FF0000");
+            signinEmailPN.setStyle("-fx-background-color: #008000");
         }
         else
         {
-            signinEmailPN.setStyle("-fx-background-color: #008000");
+            signinEmailPN.setStyle("-fx-background-color: #FF0000");
         }
     }
 

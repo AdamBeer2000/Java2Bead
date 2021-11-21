@@ -66,7 +66,7 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <TextField fx:id="signinEmail" layoutX="75.0" layoutY="251.0" onKeyTyped="#signinEmailChangeEvent" prefHeight="53.0" prefWidth="582.0" promptText="template.email@gmal.com">
+            <TextField fx:id="signinEmail" layoutX="75.0" layoutY="251.0" onKeyReleased="#signinEmailReleaseEvent" prefHeight="53.0" prefWidth="582.0" promptText="template.email@gmal.com">
                <font>
                   <Font size="20.0" />
                </font>
@@ -82,7 +82,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="signinUsername" layoutX="75.0" layoutY="117.0" onKeyTyped="#signinUsernameChangeEvent" prefHeight="53.0" prefWidth="258.0">
+            <TextField fx:id="signinUsername" layoutX="75.0" layoutY="117.0" onKeyReleased="#signinUsernameChangeEvent" prefHeight="53.0" prefWidth="258.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -90,7 +90,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="signinPassword" accessibleRole="PASSWORD_FIELD" layoutX="399.0" layoutY="117.0" onKeyTyped="#signinPasswordChangeEvent" prefHeight="53.0" prefWidth="258.0">
+            <TextField fx:id="signinPassword" accessibleRole="PASSWORD_FIELD" layoutX="399.0" layoutY="117.0" onKeyReleased="#signinPasswordChangeEvent" prefHeight="53.0" prefWidth="258.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -98,7 +98,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="loginUsername" layoutX="807.0" layoutY="251.0" onKeyTyped="#loginUsernameChangeEvent" prefHeight="53.0" prefWidth="404.0">
+            <TextField fx:id="loginUsername" layoutX="807.0" layoutY="251.0" onKeyReleased="#loginUsernameChangeEvent" prefHeight="53.0" prefWidth="404.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -106,7 +106,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="loginPassword" accessibleRole="PASSWORD_FIELD" layoutX="807.0" layoutY="385.0" onKeyTyped="#loginPasswordChangeEvent" prefHeight="53.0" prefWidth="404.0">
+            <TextField fx:id="loginPassword" accessibleRole="PASSWORD_FIELD" layoutX="807.0" layoutY="385.0" onKeyReleased="#loginPasswordChangeEvent" prefHeight="53.0" prefWidth="404.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -116,7 +116,7 @@
             </TextField>
             <Pane fx:id="loginUsernamePN" layoutX="807.0" layoutY="302.0" prefHeight="3.0" prefWidth="404.0" />
             <Pane fx:id="loginPasswordPN" layoutX="807.0" layoutY="436.0" prefHeight="3.0" prefWidth="404.0" />
-            <Pane fx:id="signinEmailPN" layoutX="77.0" layoutY="302.0" prefHeight="3.0" prefWidth="582.0" />
+            <Pane fx:id="signinEmailPN" layoutX="75.0" layoutY="302.0" prefHeight="3.0" prefWidth="582.0" />
             <Pane fx:id="signinUsernamePN" layoutX="75.0" layoutY="168.0" prefHeight="3.0" prefWidth="258.0" />
             <Pane fx:id="signinPasswordPN" layoutX="399.0" layoutY="168.0" prefHeight="3.0" prefWidth="258.0" />
          </children>
