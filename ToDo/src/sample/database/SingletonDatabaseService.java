@@ -50,16 +50,9 @@ public class SingletonDatabaseService
         ArrayList<ToDoObject> ret=new ArrayList<>();
 
         String query="";
-        if(todo.start_date!=null&&todo.deadline!=null)
-        {
-            query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished,start_date,deadline) "+
-                "VALUES(?,?,?,?,?,?,?,?)";
-        }
-        else
-        {
-            query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished) "+
-                    "VALUES(?,?,?,?,?,?)";
-        }
+
+        query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished,start_date,deadline) "+
+            "VALUES(?,?,?,?,?,?,?,?)";
 
         PreparedStatement  stmt= conn.prepareStatement(query);
 
@@ -70,13 +63,23 @@ public class SingletonDatabaseService
         stmt.setString(5,todo.description);
         stmt.setBoolean(6,todo.is_finished);
 
-        if(todo.start_date!=null&&todo.deadline!=null)
+        if(todo.start_date!=null)
         {
             stmt.setDate(7,new java.sql.Date(todo.start_date.getTime()));
-            stmt.setDate(8,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(7,null);
         }
 
-        System.out.println(query);
+        if(todo.deadline!=null)
+        {
+            stmt.setDate(8,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(8,null);
+        }
 
         stmt.executeUpdate();
     }

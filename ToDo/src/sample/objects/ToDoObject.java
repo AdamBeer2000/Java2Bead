@@ -10,6 +10,7 @@ public class ToDoObject
 {
 
     //---- [Variables] ----
+    public int todoId;
     public Importance importance;
     public Category category;
     public String title;
@@ -23,6 +24,7 @@ public class ToDoObject
     //---- [CONSTRUCTORS] ----
     public ToDoObject()
     {
+        this.todoId= Integer.MAX_VALUE;
         this.title = "NO TITLE";
         this.description = "";
         this.importance = Importance.NOT_IMPORTANT;
@@ -34,6 +36,7 @@ public class ToDoObject
                       Category in_category, Importance in_importance,boolean is_finished)
 
     {
+        this.todoId= todoId;
         this.title = in_title;
         this.description = in_description;
         this.category = in_category;
@@ -47,6 +50,7 @@ public class ToDoObject
     public ToDoObject(int todoid,String in_title, String in_description,Date start_date, Date in_deadline,
                       Category in_category, Importance in_importance,boolean is_finished)
     {
+        this.todoId= todoid;
         this.title = in_title;
         this.description = in_description;
         this.category = in_category;

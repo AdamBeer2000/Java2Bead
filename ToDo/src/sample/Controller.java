@@ -8,8 +8,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import sample.database.SingletonDatabaseService;
+import sample.enums.Category;
+import sample.enums.Importance;
+import sample.objects.ToDoObject;
+import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,13 +119,29 @@ public class Controller {
 
         if(!taskName.getText().isEmpty())
         {
-            defaultVBox.setDisable(false);
-            addPane.setDisable(true);
-            addPane.setVisible(false);
-            bannerPane.setVisible(false);
-            bannerPane.setDisable(true);
+            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+            SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+            try
+            {
+                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
+                if(deadlinePicker.getValue()!=null)
+                {
+                    builder.withDeadLine(deadlinePicker.getValue());
+                }
 
-            //TODO: add todo to database
+                sds.addTodoToUser(slum.getUserid(),builder.Build());
+
+                defaultVBox.setDisable(false);
+                addPane.setDisable(true);
+                addPane.setVisible(false);
+                bannerPane.setVisible(false);
+                bannerPane.setDisable(true);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                //todo fail
+            }
         }
     }
 
