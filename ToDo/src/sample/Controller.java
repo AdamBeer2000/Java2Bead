@@ -1,22 +1,15 @@
 package sample;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import sample.database.SingletonDatabaseService;
 import sample.users.SingletonLoggedUserManager;
 
-import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,10 +70,16 @@ public class Controller {
     private Pane signinEmailPN;
 
     @FXML
+    private Pane popupPane;
+
+    @FXML
     private DatePicker deadlinePicker;
 
     @FXML
     private Text clock;
+
+    @FXML
+    private Text popupMessage;
 
     /*@FXML
     public void update()
@@ -140,9 +139,11 @@ public class Controller {
         if(loginUsername.getText().isEmpty()||loginPassword.getText().isEmpty())
         {
             //todo kirni hogy üres x
+            setPopup("-fx-background-color: #FF0000", "Missing Username or Password!");
         }
         else if(slum.loginUser(loginUsername.getText(),loginPassword.getText()))
         {
+            setPopup("-fx-background-color: #008000", "Successful login!");
             loginPane.setVisible(false);
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
@@ -151,6 +152,7 @@ public class Controller {
         else
         {
             //todo sikertelen bejelentkezés
+            setPopup("-fx-background-color: #FF0000", "Login failed!");
         }
     }
 
@@ -161,6 +163,7 @@ public class Controller {
             SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
             sds.addUser(signinUsername.getText(),signinPassword.getText(),signinEmail.getText());
 
+            setPopup("-fx-background-color: #008000", "Successful sign in!");
             loginPane.setVisible(false);
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
@@ -169,6 +172,7 @@ public class Controller {
         }catch (Exception e)
         {
             //todo fail
+            setPopup("-fx-background-color: #FF0000", "Sign in failed!");
         }
 
     }
@@ -177,11 +181,11 @@ public class Controller {
     {
         if(loginUsername.getText().isEmpty())
         {
-            loginUsernamePN.setStyle("-fx-background-color: RED");
+            loginUsernamePN.setStyle("-fx-background-color: #FF0000");
         }
         else
         {
-            loginUsernamePN.setStyle("-fx-background-color: GREEN");
+            loginUsernamePN.setStyle("-fx-background-color: #008000");
         }
     }
 
@@ -238,5 +242,38 @@ public class Controller {
         {
             signinPasswordPN.setStyle("-fx-background-color: #008000");
         }
+    }
+
+    //POPUP
+    public void setPopup(String color, String msg)
+    {
+        popupPane.setStyle(color + "; -fx-opacity: 0.5");
+        popupMessage.setText(msg);
+
+        Thread wait_thread = new Thread(() -> {
+            popupPane.setVisible(true);
+            popupPane.setDisable(false);
+
+            try
+            {
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e)
+            {
+                System.err.print("[THREAD ERROR]:");
+                e.printStackTrace();
+            }
+
+            popupPane.setVisible(false);
+            popupPane.setDisable(true);
+        });
+
+        wait_thread.start();
+    }
+
+    public void closePopupButtonEvent(MouseEvent mouseEvent)
+    {
+        popupPane.setVisible(false);
+        popupPane.setDisable(true);
     }
 }
