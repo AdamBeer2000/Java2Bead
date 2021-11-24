@@ -299,9 +299,16 @@ public class SingletonDatabaseService
         }
     }
 
+    //hozáad egy felhasználót egy csoporthoz
     public void addUserToGroup(int userId,int groupId)throws SQLException
     {
         //todo
+    }
+    //létrahoz egy csoportot és viszadja az id-jét
+    public int createGroup(String Name)throws SQLException
+    {
+        //todo
+        return 0;
     }
 
     // a userhez tartozó csoportok és azok todoik lekérése
