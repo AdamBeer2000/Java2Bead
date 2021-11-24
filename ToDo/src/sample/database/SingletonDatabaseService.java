@@ -2,11 +2,13 @@ package sample.database;
 
 import sample.enums.Category;
 import sample.enums.Importance;
+import sample.groups.Group;
 import sample.objects.ToDoObject;
 import sample.users.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SingletonDatabaseService
 {
@@ -254,8 +256,6 @@ public class SingletonDatabaseService
         stmt.setString(3,email);
 
         stmt.executeUpdate();
-
-
     }
     public User getUser(String username, String password) throws Exception
     {
@@ -297,5 +297,62 @@ public class SingletonDatabaseService
         {
             throw new Exception("No user with name:"+username);
         }
+    }
+
+    public void addUserToGroup(int userId,int groupId)throws SQLException
+    {
+        //todo
+    }
+
+    // a userhez tartozó csoportok és azok todoik lekérése
+    public HashMap<Integer, Group> getAllGroup(int userId) throws SQLException
+    {
+        Connection conn=getConnection();
+        HashMap<Integer,Group> assiciates=new HashMap<>();
+
+        String query="SELECT grups.grupid,grups.grupname FROM `users`\n" +
+                     "JOIN grupmembers on users.id=grupmembers.userid\n" +
+                     "JOIN grups on grupmembers.grupid=grups.grupid\n" +
+                     "WHERE users.id=?";
+        PreparedStatement stmt=conn.prepareStatement(query);
+        stmt.setInt(1,userId);
+        ResultSet rst=stmt.executeQuery();
+
+        while (rst.next())
+        {
+            int groupId=rst.getInt("grupid");
+            Group currGroup=new Group(groupId,rst.getString("grupname"));
+            assiciates.put(groupId,currGroup);
+
+            String secondQuery="SELECT * from todotable WHERE grupid=?";
+            stmt=conn.prepareStatement(secondQuery);
+            stmt.setInt(1,groupId);
+
+            ResultSet rstSecond=stmt.executeQuery();
+
+            while (rstSecond.next())
+            {
+                int todoId=rstSecond.getInt("todoid");
+
+                Importance importance;
+                int impid=rstSecond.getInt("importanceid");
+                importance=Importance.IntToImportance(impid);
+
+                Category category;
+                int catid=rstSecond.getInt("categoryid");
+                category=Category.IntToCategory(catid);
+
+                String title=rstSecond.getString("title");
+                String description=rstSecond.getString("description");
+
+                java.util.Date deadline=rstSecond.getDate("deadline");
+                java.util.Date start_date=rstSecond.getDate("start_date");
+
+                boolean is_finished=rstSecond.getBoolean("finished");
+
+                currGroup.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+            }
+        }
+        return assiciates;
     }
 }

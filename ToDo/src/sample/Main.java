@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import sample.database.SingletonDatabaseService;
 import sample.enums.Category;
 import sample.enums.Importance;
+import sample.groups.Group;
 import sample.objects.ToDoObject;
 
 import java.sql.Connection;
