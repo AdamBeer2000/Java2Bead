@@ -36,7 +36,6 @@ public class Main extends Application {
     {
         try
         {
-            sds.createGroup(3,"Alligators");
             launch(args);
         }
         catch (Exception e)
