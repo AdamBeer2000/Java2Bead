@@ -29,6 +29,7 @@ public class SingletonDatabaseService
 
     ServerSettings ss =new ServerSettings();
     private static SingletonDatabaseService instance=null;
+    Connection connection=null;
 
     public static SingletonDatabaseService getInstance()
     {
@@ -41,8 +42,18 @@ public class SingletonDatabaseService
 
     private Connection getConnection() throws SQLException
     {
-        String url = "jdbc:mysql://" + ss.hostname + ":"+ss.port+"/" + ss.databaseName;
-        return DriverManager.getConnection(url, ss.username, ss.password);
+        if (connection == null)
+        {
+            String url = "jdbc:mysql://" + ss.hostname + ":"+ss.port+"/" + ss.databaseName;
+            this.connection= DriverManager.getConnection(url, ss.username, ss.password);
+        }
+        return this.connection;
+    }
+
+    public void Close() throws SQLException
+    {
+        if(this.connection!=null) this.connection.close();
+        this.connection=null;
     }
 
     //egy todoobijektumot add hozzá az adatbázishoz
@@ -141,9 +152,6 @@ public class SingletonDatabaseService
 
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
         }
-
-        getConnection().close();
-
         return ret;
     }
 
@@ -182,9 +190,6 @@ public class SingletonDatabaseService
 
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
         }
-
-        getConnection().close();
-
         return ret;
     }
     //lekéri az összes todoját egy usernek (azon belül szűr kategória szerint)
@@ -224,9 +229,6 @@ public class SingletonDatabaseService
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
 
         }
-
-        getConnection().close();
-
         return ret;
     }
 
@@ -302,13 +304,28 @@ public class SingletonDatabaseService
     //hozáad egy felhasználót egy csoporthoz
     public void addUserToGroup(int userId,int groupId)throws SQLException
     {
-        //todo
+        String sql="INSERT INTO grupmembers(userid,grupid) VALUES(?,?)";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,userId);
+        stmt.setInt(2,groupId);
+        stmt.execute();
     }
-    //létrahoz egy csoportot és viszadja az id-jét
-    public int createGroup(String Name)throws SQLException
+
+    //létrahoz egy csoportot és hozáadja a készítőt
+    public void createGroup(int creatorId,String name)throws SQLException
     {
-        //todo
-        return 0;
+        String sql="INSERT INTO grups(grupname) VALUES(?)";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.execute();
+
+        String query="SELECT grupid FROM grups where grupname=?";
+        stmt=getConnection().prepareStatement(query);
+        stmt.setString(1,name);
+        ResultSet rs=stmt.executeQuery();
+        rs.next();
+
+        addUserToGroup(creatorId,rs.getInt("grupid"));
     }
 
     // a userhez tartozó csoportok és azok todoik lekérése
