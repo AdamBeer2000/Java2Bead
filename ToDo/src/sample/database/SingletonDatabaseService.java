@@ -4,6 +4,7 @@ import sample.enums.Category;
 import sample.enums.Importance;
 import sample.groups.Group;
 import sample.objects.ToDoObject;
+import sample.objects.TodoBuilder;
 import sample.users.User;
 
 import java.sql.*;
@@ -311,6 +312,20 @@ public class SingletonDatabaseService
         stmt.execute();
     }
 
+    public ArrayList<User> getAllUser() throws SQLException
+    {
+        ArrayList<User> users=new ArrayList<User>();
+        String sql="SELECT userid,username FROM users";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        ResultSet rst=stmt.executeQuery();
+
+        while (rst.next())
+        {
+            users.add(new User(rst.getString("username"),rst.getInt("userid")));
+        }
+        return users;
+    }
+
     //létrahoz egy csoportot és hozáadja a készítőt
     public void createGroup(int creatorId,String name)throws SQLException
     {
@@ -328,8 +343,60 @@ public class SingletonDatabaseService
         addUserToGroup(creatorId,rs.getInt("grupid"));
     }
 
+    public HashMap<Integer, Group> getAllGroup() throws SQLException
+    {
+        HashMap<Integer,Group> groups=new HashMap<>();
+        Connection conn=getConnection();
+
+        String query="SELECT grups.grupid,grups.grupname FROM `users`\n" +
+                "JOIN grupmembers on users.id=grupmembers.userid\n" +
+                "JOIN grups on grupmembers.grupid=grups.grupid\n";
+        PreparedStatement stmt=conn.prepareStatement(query);
+        ResultSet rst=stmt.executeQuery();
+
+        while (rst.next())
+        {
+            int groupId=rst.getInt("grupid");
+            Group currGroup=new Group(groupId,rst.getString("grupname"));
+            groups.put(groupId,currGroup);
+
+            String secondQuery="SELECT * from todotable WHERE grupid=?";
+            stmt=conn.prepareStatement(secondQuery);
+            stmt.setInt(1,groupId);
+
+            ResultSet rstSecond=stmt.executeQuery();
+
+            while (rstSecond.next())
+            {
+                int todoId=rstSecond.getInt("todoid");
+
+                Importance importance;
+                int impid=rstSecond.getInt("importanceid");
+                importance=Importance.IntToImportance(impid);
+
+                Category category;
+                int catid=rstSecond.getInt("categoryid");
+                category=Category.IntToCategory(catid);
+
+                String title=rstSecond.getString("title");
+                String description=rstSecond.getString("description");
+
+                java.util.Date deadline=rstSecond.getDate("deadline");
+                java.util.Date start_date=rstSecond.getDate("start_date");
+
+                boolean is_finished=rstSecond.getBoolean("finished");
+
+                //TodoBuilder tb=new TodoBuilder();
+                //todo átírni builderre
+
+                currGroup.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+            }
+        }
+        return groups;
+    }
+
     // a userhez tartozó csoportok és azok todoik lekérése
-    public HashMap<Integer, Group> getAllGroup(int userId) throws SQLException
+    public HashMap<Integer, Group> getAllGroupByUserId(int userId) throws SQLException
     {
         Connection conn=getConnection();
         HashMap<Integer,Group> assiciates=new HashMap<>();
