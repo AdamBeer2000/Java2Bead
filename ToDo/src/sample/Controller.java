@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -7,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import sample.database.SingletonDatabaseService;
 import sample.enums.Category;
 import sample.enums.Importance;
@@ -16,6 +20,7 @@ import sample.users.SingletonLoggedUserManager;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -89,18 +94,18 @@ public class Controller {
     @FXML
     private Text popupMessage;
 
-    /*@FXML
-    public void update()
+    @FXML
+    public void initialize()
     {
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
-            //clock.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
+            clock.setText(currentTime.getHour() + ":" + currentTime.getMinute());
         }),
                 new KeyFrame(Duration.seconds(1))
         );
-        clock.setCycleCount(Animation.INDEFINITE);
-        clock.play();
-    }*/
+        t_line.setCycleCount(Animation.INDEFINITE);
+        t_line.play();
+    }
 
     public void addPaneButtonEvent(MouseEvent mouseEvent)
     {
