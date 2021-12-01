@@ -302,18 +302,28 @@ public class Controller {
     public void gotoGroups(MouseEvent mouseEvent) {
     }
 
-    public void todayTasks(MouseEvent mouseEvent) {
+    public void todayTasks(MouseEvent mouseEvent)
+    {
+        //TODO: today category
     }
 
-    public void plannedTasks(MouseEvent mouseEvent) {
+    public void plannedTasks(MouseEvent mouseEvent)
+    {
+        //TODO: planned category
     }
 
-    public void unfinishedTasks(MouseEvent mouseEvent) {
+    public void unfinishedTasks(MouseEvent mouseEvent)
+    {
+        //TODO: unfinished category
     }
 
-    public void finishedtasks(MouseEvent mouseEvent) {
+    public void finishedtasks(MouseEvent mouseEvent)
+    {
+        //TODO: finished category
     }
 
-    public void allTasks(MouseEvent mouseEvent) {
+    public void allTasks(MouseEvent mouseEvent)
+    {
+        //TODO: ALL category
     }
 }
