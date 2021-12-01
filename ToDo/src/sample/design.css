@@ -1,39 +1,39 @@
 .button
 {
-    -fx-background-color: #333333;
+    -fx-background-color: #202225;
     -fx-text-fill: #888888;
 }
 
 #menuBar
 {
-    -fx-background-color: #888888;
-    -fx-text-fill: #DDDDDD;
+    -fx-background-color: #202225;
+    -fx-text-fill: #DCDDDE;
 }
 
 .menu .label
 {
-    -fx-text-fill: #DDDDDD;
+    -fx-text-fill: #DCDDDE;
     -fx-padding: 0.0em 0.0em 0.0em 0.0em;
 }
 
 .menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing
 {
-    -fx-background: #333333;
+    -fx-background: #36393F;
     -fx-opacity: 0.5;
-    -fx-text-fill: #DDDDDD;
+    -fx-text-fill: #DCDDDE;
 }
 
 .context-menu:hover
 {
     -fx-background: #333333;
     -fx-opacity: 0.6;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #DCDDDE;
 }
 
 .context-menu
 {
     -fx-background-color: #888888;
-    -fx-border-color: #777777;
+    -fx-border-color: #36393F;
 }
 
 .menu .menu-item
@@ -43,19 +43,19 @@
 
 #taskText, #descriptionText, #deadlineText
 {
-    -fx-text-fill: #888888;
+    -fx-text-fill: #40444B;
 }
 
 .text-field
 {
-    -fx-background-color: #888888;
-    -fx-text-fill: #DDDDDD;
+    -fx-background-color: #40444B;
+    -fx-text-fill: #DCDDDE;
 }
 
 .text-area {
-    text-area-background: #888888;
-    -fx-text-fill: #DDDDDD;
-    -fx-border-color: #888888;
+    text-area-background: #40444B;
+    -fx-text-fill: #DCDDDE;
+    -fx-border-color: #40444B;
     -fx-font-size: 18px
 }
 
@@ -70,12 +70,12 @@
 
 #mainList
 {
-    -fx-background-color: #777777;
+    -fx-background-color: #36393F;
 }
 
 #addPane
 {
-    -fx-background-color: #555555;
+    -fx-background-color: #33363C;
 }
 
 .date-picker
@@ -85,5 +85,5 @@
 
 .root
 {
-    -fx-background-color: #555555;
+    -fx-background-color: #33363C;
 }

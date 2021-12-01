@@ -36,32 +36,32 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Text fill="#dddddd" layoutX="807.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+            <Text fill="#dcddde" layoutX="807.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
                <font>
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text fill="#dddddd" layoutX="77.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username*">
+            <Text fill="#dcddde" layoutX="77.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username*">
                <font>
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text fill="#dddddd" layoutX="807.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+            <Text fill="#dcddde" layoutX="807.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                <font>
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text fill="#dddddd" layoutX="399.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password*">
+            <Text fill="#dcddde" layoutX="399.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password*">
                <font>
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text fill="#dddddd" layoutX="77.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail address*">
+            <Text fill="#dcddde" layoutX="77.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail address*">
                <font>
                   <Font size="29.0" />
                </font>
             </Text>
-            <Text fill="#dddddd" layoutX="75.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number">
+            <Text fill="#dcddde" layoutX="75.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number">
                <font>
                   <Font size="29.0" />
                </font>
@@ -163,7 +163,7 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Button>
-                  <Text fx:id="clock" fill="#dddddd" layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="198.85107421875">
+                  <Text fx:id="clock" fill="#dcddde" layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="198.85107421875">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -184,19 +184,19 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Text fx:id="taskText" fill="#dddddd" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task">
+            <Text fx:id="taskText" fill="#dcddde" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task">
                <font>
                   <Font size="39.0" />
                </font>
             </Text>
-            <Text fx:id="descriptionText" fill="#dddddd" layoutX="20.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+            <Text fx:id="descriptionText" fill="#dcddde" layoutX="20.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
             <TextArea fx:id="description" layoutX="20.0" layoutY="158.0" prefHeight="164.0" prefWidth="300.0" wrapText="true" />
             <DatePicker fx:id="deadlinePicker" layoutX="373.0" layoutY="158.0" prefHeight="45.0" prefWidth="310.0" showWeekNumbers="true" />
-            <Text fx:id="deadlineText" fill="#dddddd" layoutX="373.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline">
+            <Text fx:id="deadlineText" fill="#dcddde" layoutX="373.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadline">
                <font>
                   <Font size="22.0" />
                </font>
@@ -210,7 +210,7 @@
       </Pane>
       <Pane fx:id="popupPane" disable="true" layoutX="465.0" layoutY="570.0" prefHeight="120.0" prefWidth="350.0" visible="false">
          <children>
-            <Text fx:id="popupMessage" fill="#dddddd" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="350.0">
+            <Text fx:id="popupMessage" fill="#dcddde" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="350.0">
                <font>
                   <Font size="26.0" />
                </font>

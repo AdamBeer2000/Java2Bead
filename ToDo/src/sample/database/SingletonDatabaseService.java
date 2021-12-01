@@ -20,7 +20,7 @@ public class SingletonDatabaseService
         private final String hostname="b4cyzvut6ovomqbnhtk0-mysql.services.clever-cloud.com";
         private final String username="u1xpyoext1l1e1mj";
         private final String password="HL9kDWHw5gfpvqqrozBc";
-        private final String databaseName="b4cyzvut6ovomqbnhtk0";
+        private final String databaseName = "b4cyzvut6ovomqbnhtk0";
         private final int port=3306;
         public ServerSettings() {}
     }

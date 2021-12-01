@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class ToDoObject
 {
-
     //---- [Variables] ----
     public Importance importance;
     public Category category;
