@@ -298,4 +298,22 @@ public class Controller {
         popupPane.setVisible(false);
         popupPane.setDisable(true);
     }
+
+    public void gotoGroups(MouseEvent mouseEvent) {
+    }
+
+    public void todayTasks(MouseEvent mouseEvent) {
+    }
+
+    public void plannedTasks(MouseEvent mouseEvent) {
+    }
+
+    public void unfinishedTasks(MouseEvent mouseEvent) {
+    }
+
+    public void finishedtasks(MouseEvent mouseEvent) {
+    }
+
+    public void allTasks(MouseEvent mouseEvent) {
+    }
 }
