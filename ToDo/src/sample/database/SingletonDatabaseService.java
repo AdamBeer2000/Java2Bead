@@ -2,11 +2,13 @@ package sample.database;
 
 import sample.enums.Category;
 import sample.enums.Importance;
+import sample.groups.Group;
 import sample.objects.ToDoObject;
 import sample.users.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SingletonDatabaseService
 {
@@ -27,6 +29,7 @@ public class SingletonDatabaseService
 
     ServerSettings ss =new ServerSettings();
     private static SingletonDatabaseService instance=null;
+    Connection connection=null;
 
     public static SingletonDatabaseService getInstance()
     {
@@ -39,8 +42,18 @@ public class SingletonDatabaseService
 
     private Connection getConnection() throws SQLException
     {
-        String url = "jdbc:mysql://" + ss.hostname + ":"+ss.port+"/" + ss.databaseName;
-        return DriverManager.getConnection(url, ss.username, ss.password);
+        if (connection == null)
+        {
+            String url = "jdbc:mysql://" + ss.hostname + ":"+ss.port+"/" + ss.databaseName;
+            this.connection= DriverManager.getConnection(url, ss.username, ss.password);
+        }
+        return this.connection;
+    }
+
+    public void Close() throws SQLException
+    {
+        if(this.connection!=null) this.connection.close();
+        this.connection=null;
     }
 
     //egy todoobijektumot add hozzá az adatbázishoz
@@ -50,16 +63,9 @@ public class SingletonDatabaseService
         ArrayList<ToDoObject> ret=new ArrayList<>();
 
         String query="";
-        if(todo.start_date!=null&&todo.deadline!=null)
-        {
-            query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished,start_date,deadline) "+
-                "VALUES(?,?,?,?,?,?,?,?)";
-        }
-        else
-        {
-            query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished) "+
-                    "VALUES(?,?,?,?,?,?)";
-        }
+
+        query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished,start_date,deadline) "+
+            "VALUES(?,?,?,?,?,?,?,?)";
 
         PreparedStatement  stmt= conn.prepareStatement(query);
 
@@ -70,13 +76,23 @@ public class SingletonDatabaseService
         stmt.setString(5,todo.description);
         stmt.setBoolean(6,todo.is_finished);
 
-        if(todo.start_date!=null&&todo.deadline!=null)
+        if(todo.start_date!=null)
         {
             stmt.setDate(7,new java.sql.Date(todo.start_date.getTime()));
-            stmt.setDate(8,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(7,null);
         }
 
-        System.out.println(query);
+        if(todo.deadline!=null)
+        {
+            stmt.setDate(8,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(8,null);
+        }
 
         stmt.executeUpdate();
     }
@@ -136,9 +152,6 @@ public class SingletonDatabaseService
 
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
         }
-
-        getConnection().close();
-
         return ret;
     }
 
@@ -177,9 +190,6 @@ public class SingletonDatabaseService
 
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
         }
-
-        getConnection().close();
-
         return ret;
     }
     //lekéri az összes todoját egy usernek (azon belül szűr kategória szerint)
@@ -219,9 +229,6 @@ public class SingletonDatabaseService
             ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
 
         }
-
-        getConnection().close();
-
         return ret;
     }
 
@@ -251,8 +258,6 @@ public class SingletonDatabaseService
         stmt.setString(3,email);
 
         stmt.executeUpdate();
-
-
     }
     public User getUser(String username, String password) throws Exception
     {
@@ -294,5 +299,84 @@ public class SingletonDatabaseService
         {
             throw new Exception("No user with name:"+username);
         }
+    }
+
+    //hozáad egy felhasználót egy csoporthoz
+    public void addUserToGroup(int userId,int groupId)throws SQLException
+    {
+        String sql="INSERT INTO grupmembers(userid,grupid) VALUES(?,?)";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,userId);
+        stmt.setInt(2,groupId);
+        stmt.execute();
+    }
+
+    //létrahoz egy csoportot és hozáadja a készítőt
+    public void createGroup(int creatorId,String name)throws SQLException
+    {
+        String sql="INSERT INTO grups(grupname) VALUES(?)";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.execute();
+
+        String query="SELECT grupid FROM grups where grupname=?";
+        stmt=getConnection().prepareStatement(query);
+        stmt.setString(1,name);
+        ResultSet rs=stmt.executeQuery();
+        rs.next();
+
+        addUserToGroup(creatorId,rs.getInt("grupid"));
+    }
+
+    // a userhez tartozó csoportok és azok todoik lekérése
+    public HashMap<Integer, Group> getAllGroup(int userId) throws SQLException
+    {
+        Connection conn=getConnection();
+        HashMap<Integer,Group> assiciates=new HashMap<>();
+
+        String query="SELECT grups.grupid,grups.grupname FROM `users`\n" +
+                     "JOIN grupmembers on users.id=grupmembers.userid\n" +
+                     "JOIN grups on grupmembers.grupid=grups.grupid\n" +
+                     "WHERE users.id=?";
+        PreparedStatement stmt=conn.prepareStatement(query);
+        stmt.setInt(1,userId);
+        ResultSet rst=stmt.executeQuery();
+
+        while (rst.next())
+        {
+            int groupId=rst.getInt("grupid");
+            Group currGroup=new Group(groupId,rst.getString("grupname"));
+            assiciates.put(groupId,currGroup);
+
+            String secondQuery="SELECT * from todotable WHERE grupid=?";
+            stmt=conn.prepareStatement(secondQuery);
+            stmt.setInt(1,groupId);
+
+            ResultSet rstSecond=stmt.executeQuery();
+
+            while (rstSecond.next())
+            {
+                int todoId=rstSecond.getInt("todoid");
+
+                Importance importance;
+                int impid=rstSecond.getInt("importanceid");
+                importance=Importance.IntToImportance(impid);
+
+                Category category;
+                int catid=rstSecond.getInt("categoryid");
+                category=Category.IntToCategory(catid);
+
+                String title=rstSecond.getString("title");
+                String description=rstSecond.getString("description");
+
+                java.util.Date deadline=rstSecond.getDate("deadline");
+                java.util.Date start_date=rstSecond.getDate("start_date");
+
+                boolean is_finished=rstSecond.getBoolean("finished");
+
+                currGroup.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+            }
+        }
+        return assiciates;
     }
 }

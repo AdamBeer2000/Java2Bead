@@ -1,8 +1,5 @@
 package sample;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -10,11 +7,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import sample.database.SingletonDatabaseService;
+import sample.enums.Category;
+import sample.enums.Importance;
+import sample.objects.ToDoObject;
+import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
 
-import java.time.LocalTime;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,18 +89,18 @@ public class Controller {
     @FXML
     private Text popupMessage;
 
-    @FXML
-    public void initialize()
+    /*@FXML
+    public void update()
     {
-        Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
-            clock.setText(currentTime.getHour() + ":" + currentTime.getMinute());
+            //clock.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
         }),
                 new KeyFrame(Duration.seconds(1))
         );
-        t_line.setCycleCount(Animation.INDEFINITE);
-        t_line.play();
-    }
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+    }*/
 
     public void addPaneButtonEvent(MouseEvent mouseEvent)
     {
@@ -116,13 +119,29 @@ public class Controller {
 
         if(!taskName.getText().isEmpty())
         {
-            defaultVBox.setDisable(false);
-            addPane.setDisable(true);
-            addPane.setVisible(false);
-            bannerPane.setVisible(false);
-            bannerPane.setDisable(true);
+            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+            SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+            try
+            {
+                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
+                if(deadlinePicker.getValue()!=null)
+                {
+                    builder.withDeadLine(deadlinePicker.getValue());
+                }
 
-            //TODO: add todo to database
+                sds.addTodoToUser(slum.getUserid(),builder.Build());
+
+                defaultVBox.setDisable(false);
+                addPane.setDisable(true);
+                addPane.setVisible(false);
+                bannerPane.setVisible(false);
+                bannerPane.setDisable(true);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                //todo fail
+            }
         }
     }
 
