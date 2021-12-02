@@ -28,17 +28,16 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Controller {
+public class Controller
+{
 
     @FXML
     private VBox defaultVBox;
 
     @FXML
     private Pane loginPane;
-
     @FXML
     private Pane bannerPane;
-
     @FXML
     private Pane addPane;
 
@@ -50,19 +49,14 @@ public class Controller {
 
     @FXML
     private TextField loginUsername;
-
     @FXML
     private TextField loginPassword;
-
     @FXML
     private TextField signinUsername;
-
     @FXML
     private TextField signinPassword;
-
     @FXML
     private TextField signinEmail;
-
     @FXML
     private TextField taskName;
 
@@ -71,25 +65,18 @@ public class Controller {
 
     @FXML
     private Pane loginUsernamePN;
-
     @FXML
     private Pane loginPasswordPN;
-
     @FXML
     private Pane signinUsernamePN;
-
     @FXML
     private Pane signinPasswordPN;
-
     @FXML
     private Pane signinEmailPN;
-
     @FXML
     private Pane groupPane;
-
     @FXML
     private Pane popupPane;
-
     @FXML
     private Pane innerBtnPane1;
     @FXML
@@ -108,10 +95,19 @@ public class Controller {
 
     @FXML
     private Text clock;
-
     @FXML
     private Text popupMessage;
 
+    @FXML
+    private RadioButton radioMostImp;
+    @FXML
+    private RadioButton radioImp;
+    @FXML
+    private RadioButton radioLessImp;
+    @FXML
+    private RadioButton radioAvg;
+    @FXML
+    private RadioButton radioNotImp;
 
     @FXML
     public void initialize()
@@ -175,27 +171,42 @@ public class Controller {
 
     public void mostImpRadio(ActionEvent actionEvent)
     {
-        System.out.println("most");
+        radioImp.setSelected(false);
+        radioLessImp.setSelected(false);
+        radioNotImp.setSelected(false);
+        radioAvg.setSelected(false);
     }
 
     public void impRadio(ActionEvent actionEvent)
     {
-        System.out.println("imp");
+        radioMostImp.setSelected(false);
+        radioLessImp.setSelected(false);
+        radioNotImp.setSelected(false);
+        radioAvg.setSelected(false);
     }
 
     public void notImpRadio(ActionEvent actionEvent)
     {
-        System.out.println("not");
+        radioImp.setSelected(false);
+        radioLessImp.setSelected(false);
+        radioMostImp.setSelected(false);
+        radioAvg.setSelected(false);
     }
 
     public void avgRadio(ActionEvent actionEvent)
     {
-        System.out.println("avg");
+        radioImp.setSelected(false);
+        radioLessImp.setSelected(false);
+        radioNotImp.setSelected(false);
+        radioMostImp.setSelected(false);
     }
 
     public void lessImpRadio(ActionEvent actionEvent)
     {
-        System.out.println("less");
+        radioImp.setSelected(false);
+        radioMostImp.setSelected(false);
+        radioNotImp.setSelected(false);
+        radioAvg.setSelected(false);
     }
 
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
