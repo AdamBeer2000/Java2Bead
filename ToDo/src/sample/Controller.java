@@ -128,6 +128,8 @@ public class Controller
     @FXML
     private TableColumn<ToDoObject, CheckBox> columnFinished;
 
+    private Category currentCategory = Category.NOLABEL;
+
     @FXML
     public void initialize()
     {
@@ -148,15 +150,31 @@ public class Controller
         t_line.play();
     }
 
-    public void dataToTable()
+    public void handleCategoryChange(Category category)
+    {
+        currentCategory = category;
+        try {
+            if(currentCategory == Category.NOLABEL)
+            {
+                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+            }else
+            {
+                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void dataToTable(ObservableList<ToDoObject> tableDataset)
     {
         try {
             for(int i = 0; i < mainTable.getItems().size(); i++)
             {
                 mainTable.getItems().remove(mainTable.getItems().get(i));
             }
-            ObservableList<ToDoObject> observable = FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid()));
-            mainTable.setItems(observable);
+            mainTable.setItems(tableDataset);
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -232,9 +250,21 @@ public class Controller
                 {
                     builder.withDeadLine(deadlinePicker.getValue());
                 }
-
+                builder.withImportance(imp);
+                builder.withCategory(currentCategory);
                 sds.addTodoToUser(slum.getUserid(),builder.Build());
-                dataToTable();
+                try {
+                    if(currentCategory != Category.NOLABEL)
+                    {
+                        dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
+                    }else
+                    {
+                        dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+                    }
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
                 defaultVBox.setDisable(false);
                 addPane.setDisable(true);
                 addPane.setVisible(false);
@@ -287,7 +317,12 @@ public class Controller
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
-            dataToTable();
+            try {
+                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
         else
         {
@@ -307,7 +342,12 @@ public class Controller
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
-            dataToTable();
+            try {
+                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }catch (Exception e)
         {
             //todo fail
@@ -431,7 +471,7 @@ public class Controller
         innerBtnPane3.setStyle("-fx-background-color: #2F3136");
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        //TODO: today category
+        handleCategoryChange(Category.TODAY);
     }
 
     public void plannedTasks(MouseEvent mouseEvent)
@@ -441,7 +481,7 @@ public class Controller
         innerBtnPane1.setStyle("-fx-background-color: #2F3136");
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        //TODO: planned category
+        handleCategoryChange(Category.PLANNED);
     }
 
     public void unfinishedTasks(MouseEvent mouseEvent)
@@ -451,7 +491,7 @@ public class Controller
         innerBtnPane3.setStyle("-fx-background-color: #2F3136");
         innerBtnPane1.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        //TODO: unfinished category
+        handleCategoryChange(Category.UNFINISHED);
     }
 
     public void finishedtasks(MouseEvent mouseEvent)
@@ -461,7 +501,7 @@ public class Controller
         innerBtnPane3.setStyle("-fx-background-color: #2F3136");
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane1.setStyle("-fx-background-color: #2F3136");
-        //TODO: finished category
+        handleCategoryChange(Category.FINISHED);
     }
 
     public void allTasks(MouseEvent mouseEvent)
@@ -471,7 +511,7 @@ public class Controller
         innerBtnPane3.setStyle("-fx-background-color: #2F3136");
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        //TODO: ALL category
+        handleCategoryChange(Category.NOLABEL);
     }
 
     public void setInnerButtonActivityColor()
