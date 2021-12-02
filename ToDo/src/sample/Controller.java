@@ -22,6 +22,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,6 +84,9 @@ public class Controller {
     private Pane signinEmailPN;
 
     @FXML
+    private Pane groupPane;
+
+    @FXML
     private Pane popupPane;
 
     @FXML
@@ -95,8 +99,12 @@ public class Controller {
     private Text popupMessage;
 
     @FXML
+    private Text groupsTextBtn;
+
+    @FXML
     public void initialize()
     {
+
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
             clock.setText(currentTime.getHour() + ":" + currentTime.getMinute());
@@ -106,6 +114,8 @@ public class Controller {
         t_line.setCycleCount(Animation.INDEFINITE);
         t_line.play();
     }
+
+    public ArrayList<ToDoObject> todos = new ArrayList<>();
 
     public void addPaneButtonEvent(MouseEvent mouseEvent)
     {
@@ -293,13 +303,25 @@ public class Controller {
         wait_thread.start();
     }
 
-    public void closePopupButtonEvent(MouseEvent mouseEvent)
-    {
+    public void closePopupButtonEvent(MouseEvent mouseEvent) {
         popupPane.setVisible(false);
         popupPane.setDisable(true);
     }
 
-    public void gotoGroups(MouseEvent mouseEvent) {
+    public void backToTodos(MouseEvent mouseEvent)
+    {
+        defaultVBox.setVisible(true);
+        defaultVBox.setDisable(false);
+        groupPane.setVisible(false);
+        groupPane.setDisable(true);
+    }
+
+    public void gotoGroups(MouseEvent mouseEvent)
+    {
+        defaultVBox.setVisible(false);
+        defaultVBox.setDisable(true);
+        groupPane.setVisible(true);
+        groupPane.setDisable(false);
     }
 
     public void todayTasks(MouseEvent mouseEvent)

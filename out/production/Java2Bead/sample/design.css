@@ -1,7 +1,7 @@
 .button
 {
     -fx-background-color: #202225;
-    -fx-text-fill: #888888;
+    -fx-text-fill: #DCDDDE;
 }
 
 #menuBar
@@ -21,6 +21,16 @@
     -fx-background: #36393F;
     -fx-opacity: 0.5;
     -fx-text-fill: #DCDDDE;
+}
+
+.textButtonStyle:hover
+{
+    -fx-opacity: 0.9;
+}
+
+.textPaneStyle:hover
+{
+    -fx-background-color: #2F3136;
 }
 
 .context-menu:hover
@@ -59,7 +69,8 @@
     -fx-font-size: 18px
 }
 
-.text-area .content {
+.text-area .content
+{
     -fx-background-color: text-area-background ;
 }
 

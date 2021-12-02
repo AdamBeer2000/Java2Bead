@@ -148,36 +148,60 @@
                <children>
                   <Pane prefHeight="605.0" prefWidth="300.0">
                      <children>
-                        <Text layoutY="595.0" onMouseClicked="#gotoGroups" strokeType="OUTSIDE" strokeWidth="0.0" text="Groups" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="40.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" text="Today" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="89.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" text="Planned" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="138.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" text="Unfinished" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="187.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" text="Finished" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="236.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" text="All" wrappingWidth="300.0">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Text>
+                        <Pane prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="59.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="118.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="177.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="236.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="546.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fx:id="groupsTextBtn" fill="#dcddde" layoutY="44.0" onMouseClicked="#gotoGroups" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Groups" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children></Pane>
                   <Pane layoutX="300.0" prefHeight="605.0" prefWidth="680.0">
                      <children>
@@ -259,7 +283,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="groupPane" layoutY="24.0" prefHeight="696.0" prefWidth="1280.0" visible="false">
+      <Pane fx:id="groupPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
             <Button fx:id="createGroupBtn" layoutX="1084.0" layoutY="23.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="172.0" text="Create Group">
                <font>
@@ -271,7 +295,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="backBtn" layoutX="14.0" layoutY="641.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="141.0" text="Back">
+            <Button fx:id="backBtn" layoutX="14.0" layoutY="662.0" mnemonicParsing="false" onMouseClicked="#backToTodos" prefHeight="44.0" prefWidth="141.0" text="Back">
                <font>
                   <Font size="20.0" />
                </font>

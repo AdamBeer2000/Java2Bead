@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -17,7 +19,7 @@
 
 <Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0">
+      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
             <Line endY="640.0" layoutX="740.0" layoutY="40.0" stroke="#202225" />
             <Button fx:id="loginButton" layoutX="808.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#loginButtonEvent" prefHeight="78.0" prefWidth="404.0" text="Login">
@@ -121,7 +123,7 @@
             <Pane fx:id="signinPasswordPN" layoutX="399.0" layoutY="168.0" prefHeight="3.0" prefWidth="258.0" />
          </children>
       </Pane>
-      <VBox fx:id="defaultVBox" layoutX="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" visible="false">
+      <VBox fx:id="defaultVBox" layoutX="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <MenuBar fx:id="menuBar">
               <menus>
@@ -144,7 +146,63 @@
             </MenuBar>
             <Pane prefHeight="615.0" prefWidth="1280.0">
                <children>
-                  <Pane prefHeight="605.0" prefWidth="300.0" />
+                  <Pane prefHeight="605.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="59.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="118.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="177.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="236.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="546.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
+                           <children>
+                              <Text fx:id="groupsTextBtn" fill="#dcddde" layoutY="44.0" onMouseClicked="#gotoGroups" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Groups" wrappingWidth="300.0">
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children></Pane>
                   <Pane layoutX="300.0" prefHeight="605.0" prefWidth="680.0">
                      <children>
                         <ListView fx:id="mainList" layoutY="1.0" prefHeight="603.0" prefWidth="680.0" />
@@ -223,6 +281,31 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="groupPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
+         <children>
+            <Button fx:id="createGroupBtn" layoutX="1084.0" layoutY="23.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="172.0" text="Create Group">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="joinGroupBtn" layoutX="1084.0" layoutY="88.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="172.0" text="Join Group">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backBtn" layoutX="14.0" layoutY="662.0" mnemonicParsing="false" onMouseClicked="#backToTodos" prefHeight="44.0" prefWidth="141.0" text="Back">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <TableView layoutX="124.0" layoutY="41.0" prefHeight="548.0" prefWidth="908.0">
+              <columns>
+                <TableColumn prefWidth="433.0" text="Group" />
+                <TableColumn prefWidth="474.0" text="Tasks" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>
