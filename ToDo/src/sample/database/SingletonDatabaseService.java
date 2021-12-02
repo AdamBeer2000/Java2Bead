@@ -201,7 +201,7 @@ public class SingletonDatabaseService
 
         String query=
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
-                        " FROM todotable" + " WHERE ownerid="+userid+" and importanceid="+cat.ToInt();
+                        " FROM todotable" + " WHERE ownerid="+userid+" and categoryid="+cat.ToInt();
 
         System.out.println(query);
         Statement stmt= conn.createStatement();
