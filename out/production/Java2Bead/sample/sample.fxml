@@ -2,11 +2,14 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -20,6 +23,25 @@
 
 <Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem fx:id="mainMenuDelete" mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
       <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
             <Line endY="640.0" layoutX="740.0" layoutY="40.0" stroke="#202225" />
@@ -147,6 +169,15 @@
             </MenuBar>
             <Pane prefHeight="615.0" prefWidth="1280.0">
                <children>
+                  <TableView fx:id="mainTable" prefHeight="605.0" prefWidth="680.0">
+                    <columns>
+                      <TableColumn fx:id="tableTitle" prefWidth="100.0" text="Title" />
+                      <TableColumn fx:id="tableStartDate" prefWidth="100.0" text="Start Date" />
+                        <TableColumn fx:id="tableDeadline" prefWidth="100.0" text="Deadline" />
+                        <TableColumn fx:id="tableDescription" prefWidth="315.0" text="Description" />
+                        <TableColumn fx:id="tableFinished" prefWidth="64.0" text="Finished" />
+                    </columns>
+                  </TableView>
                   <Pane prefHeight="605.0" prefWidth="300.0">
                      <children>
                         <Pane fx:id="innerBtnPaneX" layoutY="287.0" prefHeight="318.0" prefWidth="10.0" />
@@ -305,6 +336,9 @@
       </Pane>
       <Pane fx:id="popupPane" disable="true" layoutX="465.0" layoutY="570.0" prefHeight="120.0" prefWidth="350.0" visible="false">
          <children>
+            <Line endX="1280.0" />
+            <HBox prefHeight="100.0" prefWidth="979.0" />
+            <Button fx:id="addTodo" layoutX="1026.0" layoutY="38.0" mnemonicParsing="false" text="Hozzáadás +" />
             <Text fx:id="popupMessage" fill="#dcddde" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="350.0">
                <font>
                   <Font size="26.0" />

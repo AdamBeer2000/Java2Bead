@@ -1,5 +1,15 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import sample.database.SingletonDatabaseService;
+import sample.objects.ToDoObject;
+import java.sql.SQLException;
+import java.util.Date;  
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,6 +41,17 @@ import java.util.regex.Pattern;
 public class Controller
 {
 
+    private static SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+
+    @FXML
+    private MenuItem mainMenuDelete;
+
+    @FXML
+    private TableView<ToDoObject> mainTable;
+
+    @FXML
+    private TableColumn<ToDoObject, String> tableTitle;
+
     @FXML
     private VBox defaultVBox;
 
@@ -42,9 +63,16 @@ public class Controller
     private Pane addPane;
 
     @FXML
-    private ListView<String> mainList;
+    private TableColumn<ToDoObject, Date> tableStartDate;
 
     @FXML
+    private TableColumn<ToDoObject, Date> tableDeadline;
+
+    @FXML
+    private TableColumn<ToDoObject, String> tableDescription;
+
+    @FXML
+    private TableColumn<ToDoObject, CheckBox> tableFinished;
     private Button addTodo;
 
     @FXML
@@ -113,6 +141,20 @@ public class Controller
     public void initialize()
     {
         setInnerButtonActivityColor();
+
+        tableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tableStartDate.setCellValueFactory(new PropertyValueFactory<>("start_date"));
+        tableDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableFinished.setCellValueFactory(new PropertyValueFactory<>("is_finished_checkbox"));
+
+        try {
+            final ObservableList<ToDoObject> tableData = FXCollections.observableArrayList(sds.getAllTodoByUserId(0));
+            mainTable.setItems(tableData);
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
