@@ -138,37 +138,6 @@ public class Controller
         description.setText("");
     }
 
-    public void addTodoButtonEvent(MouseEvent mouseEvent)
-    {
-
-        if(!taskName.getText().isEmpty())
-        {
-            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
-            SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
-            try
-            {
-                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
-                if(deadlinePicker.getValue()!=null)
-                {
-                    builder.withDeadLine(deadlinePicker.getValue());
-                }
-
-                sds.addTodoToUser(slum.getUserid(),builder.Build());
-
-                defaultVBox.setDisable(false);
-                addPane.setDisable(true);
-                addPane.setVisible(false);
-                bannerPane.setVisible(false);
-                bannerPane.setDisable(true);
-
-            }catch (Exception e)
-            {
-                e.printStackTrace();
-                //todo fail
-            }
-        }
-    }
-
     public void mostImpRadio(ActionEvent actionEvent)
     {
         radioImp.setSelected(false);
@@ -209,8 +178,51 @@ public class Controller
         radioAvg.setSelected(false);
     }
 
+    public void addTodoButtonEvent(MouseEvent mouseEvent)
+    {
+
+        if(!taskName.getText().isEmpty())
+        {
+            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+            SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+            try
+            {
+                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText()); //TODO: importance hozzáadása, amennyiben nem null, a checker fv még nincs kész
+                if(deadlinePicker.getValue()!=null)
+                {
+                    builder.withDeadLine(deadlinePicker.getValue());
+                }
+
+                sds.addTodoToUser(slum.getUserid(),builder.Build());
+
+                defaultVBox.setDisable(false);
+                addPane.setDisable(true);
+                addPane.setVisible(false);
+                bannerPane.setVisible(false);
+                bannerPane.setDisable(true);
+
+                radioImp.setSelected(false);
+                radioLessImp.setSelected(false);
+                radioNotImp.setSelected(false);
+                radioMostImp.setSelected(false);
+                radioAvg.setSelected(false);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                //todo fail
+            }
+        }
+    }
+
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
     {
+        radioImp.setSelected(false);
+        radioLessImp.setSelected(false);
+        radioNotImp.setSelected(false);
+        radioMostImp.setSelected(false);
+        radioAvg.setSelected(false);
+
         defaultVBox.setDisable(false);
         addPane.setDisable(true);
         addPane.setVisible(false);
