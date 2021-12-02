@@ -28,7 +28,7 @@
     -fx-opacity: 0.9;
 }
 
-.textPaneStyle:hover, .textPaneStyle:selected
+.textPaneStyle:hover
 {
     -fx-background-color: #2F3136;
 }

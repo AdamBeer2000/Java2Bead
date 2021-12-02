@@ -90,6 +90,19 @@ public class Controller {
     private Pane popupPane;
 
     @FXML
+    private Pane innerBtnPane1;
+    @FXML
+    private Pane innerBtnPane2;
+    @FXML
+    private Pane innerBtnPane3;
+    @FXML
+    private Pane innerBtnPane4;
+    @FXML
+    private Pane innerBtnPane5;
+    @FXML
+    private Pane innerBtnPaneX;
+
+    @FXML
     private DatePicker deadlinePicker;
 
     @FXML
@@ -104,6 +117,12 @@ public class Controller {
     @FXML
     public void initialize()
     {
+        innerBtnPane1.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
+        innerBtnPaneX.setStyle("-fx-background-color: #2F3136");
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -326,26 +345,51 @@ public class Controller {
 
     public void todayTasks(MouseEvent mouseEvent)
     {
+        innerBtnPane2.setStyle("-fx-background-color: #202225");
+        innerBtnPane1.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         //TODO: today category
     }
 
     public void plannedTasks(MouseEvent mouseEvent)
     {
+        innerBtnPane3.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane1.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         //TODO: planned category
     }
 
     public void unfinishedTasks(MouseEvent mouseEvent)
     {
+        innerBtnPane4.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane1.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         //TODO: unfinished category
     }
 
     public void finishedtasks(MouseEvent mouseEvent)
     {
+        innerBtnPane5.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane1.setStyle("-fx-background-color: #2F3136");
         //TODO: finished category
     }
 
     public void allTasks(MouseEvent mouseEvent)
     {
+        innerBtnPane1.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         //TODO: ALL category
     }
 }

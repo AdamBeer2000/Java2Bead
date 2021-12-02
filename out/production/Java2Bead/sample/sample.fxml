@@ -148,54 +148,60 @@
                <children>
                   <Pane prefHeight="605.0" prefWidth="300.0">
                      <children>
+                        <Pane fx:id="innerBtnPaneX" layoutY="287.0" prefHeight="318.0" prefWidth="10.0" />
                         <Pane prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
                               </Text>
+                              <Pane fx:id="innerBtnPane1" prefHeight="59.0" prefWidth="10.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="59.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
                               </Text>
+                              <Pane fx:id="innerBtnPane2" prefHeight="59.0" prefWidth="10.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="118.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
                               </Text>
+                              <Pane fx:id="innerBtnPane3" prefHeight="59.0" prefWidth="10.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="177.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
                               </Text>
+                              <Pane fx:id="innerBtnPane4" prefHeight="59.0" prefWidth="10.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="236.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
                               </Text>
+                              <Pane fx:id="innerBtnPane5" prefHeight="59.0" prefWidth="10.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="546.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fx:id="groupsTextBtn" fill="#dcddde" layoutY="44.0" onMouseClicked="#gotoGroups" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Groups" wrappingWidth="300.0">
+                              <Text fx:id="groupsTextBtn" fill="#dcddde" layoutX="15.0" layoutY="44.0" onMouseClicked="#gotoGroups" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Groups" wrappingWidth="283.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
