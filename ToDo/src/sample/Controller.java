@@ -240,6 +240,7 @@ public class Controller
                 {
                     builder.withDeadLine(deadlinePicker.getValue());
                 }
+                builder.withImportance(imp);
 
                 sds.addTodoToUser(slum.getUserid(),builder.Build());
 
