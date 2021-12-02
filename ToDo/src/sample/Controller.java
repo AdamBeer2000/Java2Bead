@@ -3,6 +3,7 @@ package sample;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -111,18 +112,11 @@ public class Controller {
     @FXML
     private Text popupMessage;
 
-    @FXML
-    private Text groupsTextBtn;
 
     @FXML
     public void initialize()
     {
-        innerBtnPane1.setStyle("-fx-background-color: #202225");
-        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
-        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
-        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
-        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        innerBtnPaneX.setStyle("-fx-background-color: #2F3136");
+        setInnerButtonActivityColor();
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -177,6 +171,31 @@ public class Controller {
                 //todo fail
             }
         }
+    }
+
+    public void mostImpRadio(ActionEvent actionEvent)
+    {
+        System.out.println("most");
+    }
+
+    public void impRadio(ActionEvent actionEvent)
+    {
+        System.out.println("imp");
+    }
+
+    public void notImpRadio(ActionEvent actionEvent)
+    {
+        System.out.println("not");
+    }
+
+    public void avgRadio(ActionEvent actionEvent)
+    {
+        System.out.println("avg");
+    }
+
+    public void lessImpRadio(ActionEvent actionEvent)
+    {
+        System.out.println("less");
     }
 
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
@@ -391,5 +410,15 @@ public class Controller {
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         //TODO: ALL category
+    }
+
+    public void setInnerButtonActivityColor()
+    {
+        innerBtnPane1.setStyle("-fx-background-color: #202225");
+        innerBtnPane2.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane3.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane4.setStyle("-fx-background-color: #2F3136");
+        innerBtnPane5.setStyle("-fx-background-color: #2F3136");
+        innerBtnPaneX.setStyle("-fx-background-color: #2F3136");
     }
 }
