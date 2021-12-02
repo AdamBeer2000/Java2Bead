@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class ToDoObject
 {
-
     //---- [Variables] ----
+    public int todoId;
     public Importance importance;
     public Category category;
     public String title;
@@ -25,6 +25,7 @@ public class ToDoObject
     //---- [CONSTRUCTORS] ----
     public ToDoObject()
     {
+        this.todoId= Integer.MAX_VALUE;
         this.title = "NO TITLE";
         this.description = "";
         this.importance = Importance.NOT_IMPORTANT;
@@ -48,22 +49,28 @@ public class ToDoObject
         evaluateCheckbox(this.is_finished);
     }
 
-    public ToDoObject(String in_title, String in_description, Category in_category, Importance in_importance)
+    public ToDoObject(int todoId,String in_title, String in_description,
+                      Category in_category, Importance in_importance,boolean is_finished)
+
     {
+        this.todoId= todoId;
         this.title = in_title;
         this.description = in_description;
         this.category = in_category;
         this.importance = in_importance;
-
         this.start_date = null;
         this.deadline = null;
         this.is_finished_checkbox = new CheckBox();
-        this.is_finished = false;
+        this.is_finished = is_finished;
 
         evaluateCheckbox(this.is_finished);
     }
-    public ToDoObject(String in_title, String in_description,Date start_date, Date in_deadline, Category in_category, Importance in_importance)
+
+
+    public ToDoObject(int todoid,String in_title, String in_description,Date start_date, Date in_deadline,
+                      Category in_category, Importance in_importance,boolean is_finished)
     {
+        this.todoId= todoid;
         this.title = in_title;
         this.description = in_description;
         this.category = in_category;
@@ -71,7 +78,7 @@ public class ToDoObject
         this.start_date = start_date;
         this.deadline = in_deadline;
         this.is_finished_checkbox = new CheckBox();
-        this.is_finished = false;
+        this.is_finished = is_finished;
 
         evaluateCheckbox(this.is_finished);
     }

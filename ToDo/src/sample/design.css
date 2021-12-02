@@ -1,12 +1,100 @@
-#addTodo
+.button
 {
-    -fx-font-size: 20;
-    -fx-background-color: #333333;
-    -fx-text-fill: #888888;
-    -fx-font-weight: bold;
+    -fx-background-color: #202225;
+    -fx-text-fill: #DCDDDE;
+}
+
+#menuBar
+{
+    -fx-background-color: #202225;
+    -fx-text-fill: #DCDDDE;
+}
+
+.menu .label
+{
+    -fx-text-fill: #DCDDDE;
+    -fx-padding: 0.0em 0.0em 0.0em 0.0em;
+}
+
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing
+{
+    -fx-background: #36393F;
+    -fx-opacity: 0.5;
+    -fx-text-fill: #DCDDDE;
+}
+
+.textButtonStyle:hover
+{
+    -fx-opacity: 0.9;
+}
+
+.textPaneStyle:hover
+{
+    -fx-background-color: #2F3136;
+}
+
+.context-menu:hover
+{
+    -fx-background: #333333;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #DCDDDE;
+}
+
+.context-menu
+{
+    -fx-background-color: #888888;
+    -fx-border-color: #36393F;
+}
+
+.menu .menu-item
+{
+    -fx-background-color: #888888;
+}
+
+#taskText, #descriptionText, #deadlineText
+{
+    -fx-text-fill: #40444B;
+}
+
+.text-field
+{
+    -fx-background-color: #40444B;
+    -fx-text-fill: #DCDDDE;
+}
+
+.text-area {
+    text-area-background: #40444B;
+    -fx-text-fill: #DCDDDE;
+    -fx-border-color: #40444B;
+    -fx-font-size: 18px
+}
+
+.text-area .content
+{
+    -fx-background-color: text-area-background ;
+}
+
+#bannerPane
+{
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+}
+
+#mainList
+{
+    -fx-background-color: #36393F;
+}
+
+#addPane
+{
+    -fx-background-color: #33363C;
+}
+
+.date-picker
+{
+    -fx-font-size: 18px
 }
 
 .root
 {
-    -fx-background-color: #666666;
+    -fx-background-color: #33363C;
 }

@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import sample.database.SingletonDatabaseService;
 import sample.enums.Category;
 import sample.enums.Importance;
+import sample.groups.Group;
 import sample.objects.ToDoObject;
 
 import java.sql.Connection;
@@ -22,10 +23,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("TODO");
+        primaryStage.setTitle("ToDo");
         Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -48,7 +50,6 @@ public class Main extends Application {
             }
 
             launch(args);
-
         }
         catch (Exception e)
         {
