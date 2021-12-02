@@ -13,9 +13,12 @@ import java.util.Date;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -40,6 +43,8 @@ import java.util.regex.Pattern;
 
 public class Controller
 {
+    SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
+    SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
 
     private static SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
 
@@ -56,6 +61,7 @@ public class Controller
     private VBox defaultVBox;
 
     @FXML
+<<<<<<< Updated upstream
     private Pane loginPane;
     @FXML
     private Pane bannerPane;
@@ -76,6 +82,8 @@ public class Controller
     private Button addTodo;
 
     @FXML
+=======
+>>>>>>> Stashed changes
     private TextField loginUsername;
     @FXML
     private TextField loginPassword;
@@ -117,6 +125,12 @@ public class Controller
     private Pane innerBtnPane5;
     @FXML
     private Pane innerBtnPaneX;
+    @FXML
+    private Pane loginPane;
+    @FXML
+    private Pane bannerPane;
+    @FXML
+    private Pane addPane;
 
     @FXML
     private DatePicker deadlinePicker;
@@ -138,10 +152,22 @@ public class Controller
     private RadioButton radioNotImp;
 
     @FXML
+    private TableView<ToDoObject> mainTable;
+    @FXML
+    private TableColumn<ToDoObject, String> columnName;
+    @FXML
+    private TableColumn<ToDoObject, Date> columnStartDate;
+    @FXML
+    private TableColumn<ToDoObject, Date> columnDeadline;
+    @FXML
+    private TableColumn<ToDoObject, CheckBox> columnFinished;
+
+    @FXML
     public void initialize()
     {
         setInnerButtonActivityColor();
 
+<<<<<<< Updated upstream
         tableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableStartDate.setCellValueFactory(new PropertyValueFactory<>("start_date"));
         tableDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
@@ -155,6 +181,12 @@ public class Controller
         {
             e.printStackTrace();
         }
+=======
+        columnName.setCellValueFactory(new PropertyValueFactory<ToDoObject, String>("title"));
+        columnStartDate.setCellValueFactory(new PropertyValueFactory<ToDoObject, Date>("start_date"));
+        columnDeadline.setCellValueFactory(new PropertyValueFactory<ToDoObject, Date>("deadline"));
+        columnFinished.setCellValueFactory(new PropertyValueFactory<ToDoObject, CheckBox>("is_finished_checked"));
+>>>>>>> Stashed changes
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -166,7 +198,19 @@ public class Controller
         t_line.play();
     }
 
-    public ArrayList<ToDoObject> todos = new ArrayList<>();
+    public void dataToTable()
+    {
+        try {
+            for(int i = 0; i < mainTable.getItems().size(); i++)
+            {
+                mainTable.getItems().remove(mainTable.getItems().get(i));
+            }
+            ObservableList<ToDoObject> observable = FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid()));
+            mainTable.setItems(observable);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addPaneButtonEvent(MouseEvent mouseEvent)
     {
@@ -231,8 +275,6 @@ public class Controller
             if(radioAvg.isSelected()) imp = Importance.AVARAGE_IMPORTANT;
             if(radioNotImp.isSelected()) imp = Importance.NOT_IMPORTANT;
 
-            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
-            SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
             try
             {
                 TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText()); //TODO: importance hozzáadása, amennyiben nem null, a checker fv még nincs kész
@@ -242,7 +284,7 @@ public class Controller
                 }
 
                 sds.addTodoToUser(slum.getUserid(),builder.Build());
-
+                dataToTable();
                 defaultVBox.setDisable(false);
                 addPane.setDisable(true);
                 addPane.setVisible(false);
@@ -283,7 +325,6 @@ public class Controller
 
     public void loginButtonEvent(MouseEvent mouseEvent)
     {
-        SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
         if(loginUsername.getText().isEmpty()||loginPassword.getText().isEmpty())
         {
             //todo kirni hogy üres x
@@ -296,6 +337,7 @@ public class Controller
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
+            dataToTable();
         }
         else
         {
@@ -308,15 +350,14 @@ public class Controller
     {
         try
         {
-            SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
             sds.addUser(signinUsername.getText(),signinPassword.getText(),signinEmail.getText());
-
+            slum.loginUser(signinUsername.getText(),signinPassword.getText());
             setPopup("-fx-background-color: #008000", "Successful sign in!");
             loginPane.setVisible(false);
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
-
+            dataToTable();
         }catch (Exception e)
         {
             //todo fail
