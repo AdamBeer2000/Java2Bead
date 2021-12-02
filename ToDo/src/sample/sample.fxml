@@ -150,7 +150,7 @@
                      <children>
                         <Pane prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="300.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
@@ -159,7 +159,7 @@
                         </Pane>
                         <Pane layoutY="59.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#todayTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Today" wrappingWidth="300.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
@@ -168,7 +168,7 @@
                         </Pane>
                         <Pane layoutY="118.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#plannedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Planned" wrappingWidth="300.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
@@ -177,7 +177,7 @@
                         </Pane>
                         <Pane layoutY="177.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#unfinishedTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Unfinished" wrappingWidth="300.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
@@ -186,7 +186,7 @@
                         </Pane>
                         <Pane layoutY="236.0" prefHeight="59.0" prefWidth="300.0" styleClass="textPaneStyle">
                            <children>
-                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#allTasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="All" wrappingWidth="300.0">
+                              <Text fill="#dcddde" layoutY="44.0" onMouseClicked="#finishedtasks" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textButtonStyle" text="Finished" wrappingWidth="300.0">
                                  <font>
                                     <Font size="37.0" />
                                  </font>
