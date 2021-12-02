@@ -18,11 +18,7 @@ public class ToDoObject
     public Date deadline;
     public Date start_date;
     public boolean is_finished;
-<<<<<<< Updated upstream
-    public CheckBox is_finished_checkbox;
-=======
     public CheckBox is_finished_checked = new CheckBox();
->>>>>>> Stashed changes
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); // ezt máshol felhasználhatjuk!
 
@@ -34,11 +30,10 @@ public class ToDoObject
         this.description = "";
         this.importance = Importance.NOT_IMPORTANT;
         this.start_date = new Date();
-        this.is_finished_checkbox = new CheckBox();
         this.is_finished = false;
-<<<<<<< Updated upstream
-
-        evaluateCheckbox(this.is_finished);
+        if (this.is_finished) {
+            this.is_finished_checked.fire();
+        }
     }
     public ToDoObject(String _title, Date _start_date, Date _deadline, String _description, boolean _is_finished)
     {
@@ -48,15 +43,11 @@ public class ToDoObject
         this.description = _description;
 
         this.importance = Importance.NOT_IMPORTANT;
-        this.is_finished_checkbox = new CheckBox();
         this.is_finished = _is_finished;
-
-        evaluateCheckbox(this.is_finished);
-=======
         if (this.is_finished) {
             this.is_finished_checked.fire();
         }
->>>>>>> Stashed changes
+
     }
 
     public ToDoObject(int todoId,String in_title, String in_description,
@@ -70,16 +61,10 @@ public class ToDoObject
         this.importance = in_importance;
         this.start_date = null;
         this.deadline = null;
-        this.is_finished_checkbox = new CheckBox();
         this.is_finished = is_finished;
-<<<<<<< Updated upstream
-
-        evaluateCheckbox(this.is_finished);
-=======
         if (this.is_finished) {
             this.is_finished_checked.fire();
         }
->>>>>>> Stashed changes
     }
 
 
@@ -93,20 +78,7 @@ public class ToDoObject
         this.importance = in_importance;
         this.start_date = start_date;
         this.deadline = in_deadline;
-        this.is_finished_checkbox = new CheckBox();
         this.is_finished = is_finished;
-<<<<<<< Updated upstream
-
-        evaluateCheckbox(this.is_finished);
-    }
-
-    private void evaluateCheckbox(boolean is_finished)
-    {
-        if(is_finished)
-        {
-            this.is_finished_checkbox.fire();
-        }
-=======
         if (this.is_finished) {
             this.is_finished_checked.fire();
         }
@@ -134,7 +106,6 @@ public class ToDoObject
 
     public void setCategory(Category category) {
         this.category = category;
->>>>>>> Stashed changes
     }
 
     public String getTitle() {
@@ -169,14 +140,6 @@ public class ToDoObject
         this.start_date = start_date;
     }
 
-<<<<<<< Updated upstream
-    public CheckBox getIs_finished_checkbox() {
-        return is_finished_checkbox;
-    }
-
-    public void setIs_finished_checkbox(CheckBox is_finished_checkbox) {
-        this.is_finished_checkbox = is_finished_checkbox;
-=======
     public boolean isIs_finished() {
         return is_finished;
     }
@@ -191,6 +154,5 @@ public class ToDoObject
 
     public void setIs_finished_checked(CheckBox is_finished_checked) {
         this.is_finished_checked = is_finished_checked;
->>>>>>> Stashed changes
     }
 }

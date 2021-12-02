@@ -46,44 +46,10 @@ public class Controller
     SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
     SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
 
-    private static SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
-
-    @FXML
-    private MenuItem mainMenuDelete;
-
-    @FXML
-    private TableView<ToDoObject> mainTable;
-
-    @FXML
-    private TableColumn<ToDoObject, String> tableTitle;
-
     @FXML
     private VBox defaultVBox;
 
     @FXML
-<<<<<<< Updated upstream
-    private Pane loginPane;
-    @FXML
-    private Pane bannerPane;
-    @FXML
-    private Pane addPane;
-
-    @FXML
-    private TableColumn<ToDoObject, Date> tableStartDate;
-
-    @FXML
-    private TableColumn<ToDoObject, Date> tableDeadline;
-
-    @FXML
-    private TableColumn<ToDoObject, String> tableDescription;
-
-    @FXML
-    private TableColumn<ToDoObject, CheckBox> tableFinished;
-    private Button addTodo;
-
-    @FXML
-=======
->>>>>>> Stashed changes
     private TextField loginUsername;
     @FXML
     private TextField loginPassword;
@@ -167,26 +133,10 @@ public class Controller
     {
         setInnerButtonActivityColor();
 
-<<<<<<< Updated upstream
-        tableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        tableStartDate.setCellValueFactory(new PropertyValueFactory<>("start_date"));
-        tableDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        tableFinished.setCellValueFactory(new PropertyValueFactory<>("is_finished_checkbox"));
-
-        try {
-            final ObservableList<ToDoObject> tableData = FXCollections.observableArrayList(sds.getAllTodoByUserId(0));
-            mainTable.setItems(tableData);
-        }catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-=======
-        columnName.setCellValueFactory(new PropertyValueFactory<ToDoObject, String>("title"));
-        columnStartDate.setCellValueFactory(new PropertyValueFactory<ToDoObject, Date>("start_date"));
-        columnDeadline.setCellValueFactory(new PropertyValueFactory<ToDoObject, Date>("deadline"));
-        columnFinished.setCellValueFactory(new PropertyValueFactory<ToDoObject, CheckBox>("is_finished_checked"));
->>>>>>> Stashed changes
+        columnName.setCellValueFactory(new PropertyValueFactory<>("title"));
+        columnStartDate.setCellValueFactory(new PropertyValueFactory<>("start_date"));
+        columnDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        columnFinished.setCellValueFactory(new PropertyValueFactory<>("is_finished_checked"));
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
