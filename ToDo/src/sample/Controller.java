@@ -180,9 +180,15 @@ public class Controller
 
     public void addTodoButtonEvent(MouseEvent mouseEvent)
     {
-
+        Importance imp = Importance.NOLABEL;
         if(!taskName.getText().isEmpty())
         {
+            if(radioMostImp.isSelected()) imp = Importance.MOST_IMPORTANT;
+            if(radioImp.isSelected()) imp = Importance.IMPORTANT;
+            if(radioLessImp.isSelected()) imp = Importance.LESS_IMPORTANT;
+            if(radioAvg.isSelected()) imp = Importance.AVARAGE_IMPORTANT;
+            if(radioNotImp.isSelected()) imp = Importance.NOT_IMPORTANT;
+
             SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
             SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
             try
