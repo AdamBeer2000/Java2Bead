@@ -37,7 +37,7 @@ public class Main extends Application {
             ArrayList<ToDoObject>tdslist= sds.getAllTodoByUserIdAndImportance(0, Importance.NOT_IMPORTANT);
 
             ToDoObject ntd=new ToDoObject("nincsdatum","leiras",Category.UNFINISHED,Importance.IMPORTANT);
-            ToDoObject ntd2=new ToDoObject("nincsdatum","leiras",new Date(),new Date(),Category.UNFINISHED,Importance.IMPORTANT);;
+            ToDoObject ntd2=new ToDoObject("nincsdatum","leiras",new Date(),new Date(),Category.UNFINISHED,Importance.IMPORTANT);
 
             sds.addTodoToUser(0,ntd);
             sds.addTodoToUser(0,ntd2);
