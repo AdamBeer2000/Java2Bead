@@ -157,7 +157,12 @@ public class Controller
             if(currentCategory == Category.NOLABEL)
             {
                 dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
-            }else
+            }
+            if(currentCategory == Category.TODAY)
+            {
+                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdandDate(slum.getUserid(),new Date())));
+            }
+            else
             {
                 dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
             }

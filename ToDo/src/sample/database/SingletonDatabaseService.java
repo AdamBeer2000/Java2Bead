@@ -120,6 +120,45 @@ public class SingletonDatabaseService
 
     }
 
+    public ArrayList<ToDoObject> getAllTodoByUserIdandDate(int userid, java.util.Date date)throws SQLException
+    {
+        Connection conn =getConnection();
+        ArrayList<ToDoObject> ret=new ArrayList<>();
+
+        String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid " +
+                     "from todotable " +
+                     "where ownerid=? and deadline=?";
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.setInt(1,userid);
+        stmt.setDate(2,new java.sql.Date(date.getTime()));
+
+        ResultSet rs=stmt.executeQuery();
+        while (rs.next())
+        {
+            int todoId=rs.getInt("todoid");
+
+            Importance importance;
+            int impid=rs.getInt("importanceid");
+            importance=Importance.IntToImportance(impid);
+
+            Category category;
+            int catid=rs.getInt("categoryid");
+            category=Category.IntToCategory(catid);
+
+            String title=rs.getString("title");
+            String description=rs.getString("description");
+
+            java.util.Date deadline=rs.getDate("deadline");
+            java.util.Date start_date=rs.getDate("start_date");
+
+            boolean is_finished=rs.getBoolean("finished");
+
+            ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+        }
+        return ret;
+    }
+
     //lekéri az összes todoját egy usernek
     public ArrayList<ToDoObject> getAllTodoByUserId(int userid)throws SQLException
     {
