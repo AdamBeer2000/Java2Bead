@@ -4,6 +4,7 @@ import sample.users.User;
 
 public class Invite
 {
+
     int inviteId;//meghívás azonosító
     User inviter;//meghívó user
 
@@ -37,5 +38,9 @@ public class Invite
     public void setGroupName(String s)
     {
         GroupName=s;
+    }
+
+    public int getInviteId() {
+        return inviteId;
     }
 }

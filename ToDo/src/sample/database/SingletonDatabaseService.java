@@ -352,6 +352,8 @@ public class SingletonDatabaseService
         PreparedStatement stmt=getConnection().prepareStatement(sql);
         stmt.setInt(1,userId);
         stmt.setInt(2,groupId);
+        System.out.println(userId);
+        System.out.println(groupId);
         stmt.execute();
     }
 
@@ -424,7 +426,7 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery();
         rs.next();
         int groupId=-1;
-        while(rs.next()) groupId =rs.getInt("grupId");
+        while(rs.next()) groupId =rs.getInt("inviteId");
         addUserToGroup(invitedId,groupId);
         deleteInvite(inviteId);
     }

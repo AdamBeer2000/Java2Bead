@@ -635,7 +635,19 @@ public class Controller
 
     public void acceptInviteButtonEvent(MouseEvent mouseEvent)
     {
-        //todo accept
+        ArrayList<Invite> invites;
+        int selected = -1;
+        try
+        {
+            selected = InviteTable.getSelectionModel().getSelectedIndex();
+            invites = sds.getInvitesOffLoggedUser();
+            sds.acceptInvite(invites.get(selected).getInviteId());
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+            e.printStackTrace();
+        }
     }
 
     public void backFromInviteButtonEvent(MouseEvent mouseEvent)
@@ -647,7 +659,19 @@ public class Controller
 
     public void declineInviteButtonEvent(MouseEvent mouseEvent)
     {
-        //todo decline
+        ArrayList<Invite> invites;
+        int selected = -1;
+        try
+        {
+            selected = InviteTable.getSelectionModel().getSelectedIndex();
+            invites = sds.getInvitesOffLoggedUser();
+            sds.declineInvite(invites.get(selected).getInviteId());
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+            e.printStackTrace();
+        }
     }
 
     public void dataToInviteTable(ObservableList<Invite> tableDataset)
