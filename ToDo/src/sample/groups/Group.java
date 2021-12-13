@@ -22,16 +22,19 @@ public class Group
         this.associatedTodos=associatedTodos;
     }
 
-    public int getGroupId()
-    {
-        return this.id;
+    public int getId() {
+        return id;
     }
 
-    public String getGroupName()
-    {
-        return this.name;
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
 
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

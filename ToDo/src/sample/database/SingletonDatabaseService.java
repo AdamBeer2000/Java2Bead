@@ -462,9 +462,9 @@ public class SingletonDatabaseService
         addUserToGroup(creatorId,rs.getInt("grupid"));
     }
 
-    public HashMap<Integer, Group> getAllGroup() throws SQLException
+    public ArrayList<Group> getAllGroup() throws SQLException
     {
-        HashMap<Integer,Group> groups=new HashMap<>();
+        ArrayList<Group> groups=new ArrayList<>();
         Connection conn=getConnection();
 
         String query="SELECT grups.grupid,grups.grupname FROM `users`\n" +
@@ -477,7 +477,7 @@ public class SingletonDatabaseService
         {
             int groupId=rst.getInt("grupid");
             Group currGroup=new Group(groupId,rst.getString("grupname"));
-            groups.put(groupId,currGroup);
+            groups.add(currGroup);
 
             String secondQuery="SELECT * from todotable WHERE grupid=?";
             stmt=conn.prepareStatement(secondQuery);
@@ -515,10 +515,10 @@ public class SingletonDatabaseService
     }
 
     // a userhez tartozó csoportok és azok todoik lekérése
-    public HashMap<Integer, Group> getAllGroupByUserId(int userId) throws SQLException
+    public ArrayList<Group> getAllGroupByUserId(int userId) throws SQLException
     {
         Connection conn=getConnection();
-        HashMap<Integer,Group> assiciates=new HashMap<>();
+        ArrayList<Group> assiciates=new ArrayList<>();
 
         String query="SELECT grups.grupid,grups.grupname FROM `users`\n" +
                      "JOIN grupmembers on users.id=grupmembers.userid\n" +
@@ -532,7 +532,7 @@ public class SingletonDatabaseService
         {
             int groupId=rst.getInt("grupid");
             Group currGroup=new Group(groupId,rst.getString("grupname"));
-            assiciates.put(groupId,currGroup);
+            assiciates.add(currGroup);
 
             String secondQuery="SELECT * from todotable WHERE grupid=?";
             stmt=conn.prepareStatement(secondQuery);

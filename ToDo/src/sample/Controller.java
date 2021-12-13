@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.database.SingletonDatabaseService;
+import sample.groups.Group;
 import sample.objects.ToDoObject;
 import java.sql.SQLException;
 import java.util.Date;  
@@ -76,8 +77,6 @@ public class Controller
     @FXML
     private Pane signinEmailPN;
     @FXML
-    private Pane groupPane;
-    @FXML
     private Pane popupPane;
     @FXML
     private Pane innerBtnPane1;
@@ -128,6 +127,11 @@ public class Controller
     @FXML
     private TableColumn<ToDoObject, CheckBox> columnFinished;
 
+    @FXML
+    private TableView<Group> groupTable;
+    @FXML
+    private TableColumn<Group, String> groupTableColumn_Group;
+
     private Category currentCategory = Category.NOLABEL;
 
     @FXML
@@ -139,6 +143,9 @@ public class Controller
         columnStartDate.setCellValueFactory(new PropertyValueFactory<>("start_date"));
         columnDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
         columnFinished.setCellValueFactory(new PropertyValueFactory<>("is_finished_checked"));
+
+        groupTableColumn_Group.setCellValueFactory(new PropertyValueFactory<>("name"));
+
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -322,8 +329,10 @@ public class Controller
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
+
             try {
                 dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+                groupTable.setItems(FXCollections.observableArrayList(sds.getAllGroupByUserId(slum.getUserid())));
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -333,6 +342,15 @@ public class Controller
         {
             //todo sikertelen bejelentkezés
             setPopup("-fx-background-color: #FF0000", "Login failed!");
+        }
+    }
+
+    @FXML
+    public void clickGroupTableCell(MouseEvent event)
+    {
+        if (event.getClickCount() == 2) //Checking double click
+        {
+            dataToTable(FXCollections.observableArrayList(groupTable.getSelectionModel().getSelectedItem().associatedTodos));
         }
     }
 
@@ -451,22 +469,6 @@ public class Controller
     public void closePopupButtonEvent(MouseEvent mouseEvent) {
         popupPane.setVisible(false);
         popupPane.setDisable(true);
-    }
-
-    public void backToTodos(MouseEvent mouseEvent)
-    {
-        defaultVBox.setVisible(true);
-        defaultVBox.setDisable(false);
-        groupPane.setVisible(false);
-        groupPane.setDisable(true);
-    }
-
-    public void gotoGroups(MouseEvent mouseEvent)
-    {
-        defaultVBox.setVisible(false);
-        defaultVBox.setDisable(true);
-        groupPane.setVisible(true);
-        groupPane.setDisable(false);
     }
 
     public void todayTasks(MouseEvent mouseEvent)

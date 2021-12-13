@@ -1,9 +1,13 @@
 package sample.objects;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
+import sample.database.SingletonDatabaseService;
 import sample.enums.Category;
 import sample.enums.Importance;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +26,24 @@ public class ToDoObject
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); // ezt máshol felhasználhatjuk!
 
+    private void setupCheckbox()
+    {
+        if (this.is_finished) {
+            this.is_finished_checked.fire();
+        }
+        is_finished_checked.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            is_finished = is_finished_checked.isSelected() ?  true : false;
+            ToDoObject newTodo = this;
+            SingletonDatabaseService sds = SingletonDatabaseService.getInstance();
+            try {
+                sds.modifyTodo(todoId, newTodo);
+            }catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
     //---- [CONSTRUCTORS] ----
     public ToDoObject()
     {
@@ -31,9 +53,7 @@ public class ToDoObject
         this.importance = Importance.NOT_IMPORTANT;
         this.start_date = new Date();
         this.is_finished = false;
-        if (this.is_finished) {
-            this.is_finished_checked.fire();
-        }
+        setupCheckbox();
     }
     public ToDoObject(String _title, Date _start_date, Date _deadline, String _description, boolean _is_finished)
     {
@@ -44,10 +64,7 @@ public class ToDoObject
 
         this.importance = Importance.NOT_IMPORTANT;
         this.is_finished = _is_finished;
-        if (this.is_finished) {
-            this.is_finished_checked.fire();
-        }
-
+        setupCheckbox();
     }
 
     public ToDoObject(int todoId,String in_title, String in_description,
@@ -62,9 +79,7 @@ public class ToDoObject
         this.start_date = null;
         this.deadline = null;
         this.is_finished = is_finished;
-        if (this.is_finished) {
-            this.is_finished_checked.fire();
-        }
+        setupCheckbox();
     }
 
 
@@ -79,9 +94,7 @@ public class ToDoObject
         this.start_date = start_date;
         this.deadline = in_deadline;
         this.is_finished = is_finished;
-        if (this.is_finished) {
-            this.is_finished_checked.fire();
-        }
+        setupCheckbox();
     }
 
     public int getTodoId() {
