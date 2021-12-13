@@ -97,6 +97,11 @@
     -fx-background-color: #33363C;
 }
 
+#acceptDeclinePane
+{
+    -fx-background-color: #33363C;
+}
+
 .date-picker
 {
     -fx-font-size: 18px

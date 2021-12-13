@@ -258,6 +258,11 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Button>
+                  <Button fx:id="myInviteBtn" layoutX="454.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#letMeSeemyInvitesButtonEvent" prefHeight="69.0" prefWidth="220.0" text="My invites">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>
@@ -392,6 +397,36 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="acceptDeclinePane" layoutX="310.0" layoutY="155.0" prefHeight="450.0" prefWidth="700.0" visible="false">
+         <children>
+            <Button fx:id="acceptInviteButton" layoutX="512.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#acceptInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Accept">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backFromInvite" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#backFromInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Back">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="acceptInviteButton1" layoutX="512.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#declineInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Decline">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fx:id="groupText1" fill="#dcddde" layoutX="512.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invites">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <TableView fx:id="InviteTable" layoutX="16.0" layoutY="14.0" prefHeight="355.0" prefWidth="422.0">
+              <columns>
+                <TableColumn fx:id="inviteFromUserColumn" prefWidth="208.0" text="Invite from" />
+                <TableColumn fx:id="inviteToGroupColumn" prefWidth="213.0" text="Group" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

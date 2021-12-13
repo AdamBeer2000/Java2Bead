@@ -20,7 +20,7 @@
 
 <Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
+      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <Line endY="640.0" layoutX="740.0" layoutY="40.0" stroke="#202225" />
             <Button fx:id="loginButton" layoutX="808.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#loginButtonEvent" prefHeight="78.0" prefWidth="404.0" text="Login">
@@ -124,7 +124,7 @@
             <Pane fx:id="signinPasswordPN" layoutX="399.0" layoutY="168.0" prefHeight="3.0" prefWidth="258.0" />
          </children>
       </Pane>
-      <VBox fx:id="defaultVBox" layoutX="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+      <VBox fx:id="defaultVBox" layoutX="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
             <MenuBar fx:id="menuBar">
                <menus>
@@ -254,6 +254,11 @@
                      </font>
                   </Button>
                   <Button fx:id="addGroupButton" layoutX="695.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#toAddGroupButton" prefHeight="69.0" prefWidth="220.0" text="Add group">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="myInviteBtn" layoutX="454.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#letMeSeemyInvitesButtonEvent" prefHeight="69.0" prefWidth="220.0" text="My invites">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -394,7 +399,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="acceptDeclinePane" layoutX="310.0" layoutY="155.0" prefHeight="450.0" prefWidth="700.0">
+      <Pane fx:id="acceptDeclinePane" layoutX="310.0" layoutY="155.0" prefHeight="450.0" prefWidth="700.0" visible="false">
          <children>
             <Button fx:id="acceptInviteButton" layoutX="512.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#acceptInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Accept">
                <font>

@@ -633,26 +633,40 @@ public class Controller
 
     public void acceptInviteButtonEvent(MouseEvent mouseEvent)
     {
+        //todo accept
     }
 
     public void backFromInviteButtonEvent(MouseEvent mouseEvent)
     {
+        defaultVBox.setDisable(false);
+        acceptDeclinePane.setDisable(true);
+        acceptDeclinePane.setVisible(false);
     }
 
     public void declineInviteButtonEvent(MouseEvent mouseEvent)
     {
+        //todo decline
     }
 
     public void dataToInviteTable(ObservableList<Invite> tableDataset)
     {
-        try {
+        try
+        {
             for(int i = 0; i < InviteTable.getItems().size(); i++)
             {
                 InviteTable.getItems().remove(InviteTable.getItems().get(i));
             }
             InviteTable.setItems(tableDataset);
-        }catch(Exception e) {
+        }catch(Exception e)
+        {
             e.printStackTrace();
         }
+    }
+
+    public void letMeSeemyInvitesButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(true);
+        acceptDeclinePane.setDisable(false);
+        acceptDeclinePane.setVisible(true);
     }
 }
