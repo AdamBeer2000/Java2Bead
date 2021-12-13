@@ -410,14 +410,8 @@ public class SingletonDatabaseService
 
     public void acceptInvite(int inviteId)throws SQLException
     {
-        String sql="SELECT * FROM invites WHERE inviteId=?";
-        PreparedStatement stmt=getConnection().prepareStatement(sql);
-        stmt.setInt(1,inviteId);
-        ResultSet rs=stmt.executeQuery();
-        rs.next();
-        int groupId =rs.getInt("groupId");
         SingletonLoggedUserManager slum= SingletonLoggedUserManager.getInstance();
-        addUserToGroup(slum.getUserid(),groupId);
+        acceptInvite(slum.getUserid(),inviteId);
     }
 
     public void acceptInvite(int invitedId ,int inviteId)throws SQLException
@@ -427,7 +421,8 @@ public class SingletonDatabaseService
         stmt.setInt(1,inviteId);
         ResultSet rs=stmt.executeQuery();
         rs.next();
-        int groupId =rs.getInt("groupId");
+        int groupId=-1;
+        while(rs.next()) groupId =rs.getInt("grupId");
         addUserToGroup(invitedId,groupId);
         deleteInvite(inviteId);
     }

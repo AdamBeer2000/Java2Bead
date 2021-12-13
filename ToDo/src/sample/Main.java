@@ -10,6 +10,7 @@ import sample.enums.Category;
 import sample.enums.Importance;
 import sample.groups.Group;
 import sample.objects.ToDoObject;
+import sample.users.SingletonLoggedUserManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,6 +36,9 @@ public class Main extends Application {
     {
         try
         {
+            SingletonLoggedUserManager slum =SingletonLoggedUserManager.getInstance();
+            slum.loginUser("Béla","123456789");
+            sds.acceptInvite(3);
             launch(args);
         }
         catch (Exception e)
