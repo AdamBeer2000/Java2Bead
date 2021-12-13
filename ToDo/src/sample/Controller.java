@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.database.SingletonDatabaseService;
 import sample.groups.Group;
+import sample.groups.Invite;
 import sample.objects.ToDoObject;
 import java.util.Date;
 import javafx.animation.Animation;
@@ -23,6 +24,7 @@ import sample.enums.Category;
 import sample.enums.Importance;
 import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
+import sample.users.User;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -92,6 +94,8 @@ public class Controller
     private Pane invitePane;
     @FXML
     private Pane createGroupPane;
+    @FXML
+    private Pane acceptDeclinePane;
 
     @FXML
     private DatePicker deadlinePicker;
@@ -122,6 +126,13 @@ public class Controller
     private TableColumn<ToDoObject, Date> columnDeadline;
     @FXML
     private TableColumn<ToDoObject, CheckBox> columnFinished;
+
+    @FXML
+    private TableView<Invite> InviteTable;
+    @FXML
+    private TableColumn<Invite, User> inviteFromUserColumn;
+    @FXML
+    private TableColumn<Invite, Group> inviteToGroupColumn;
 
     @FXML
     private TableView<Group> groupTable;
