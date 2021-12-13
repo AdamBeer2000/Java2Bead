@@ -8,39 +8,26 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.database.SingletonDatabaseService;
 import sample.groups.Group;
+import sample.groups.Invite;
 import sample.objects.ToDoObject;
-import java.sql.SQLException;
-import java.util.Date;  
+import java.util.Date;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import sample.database.SingletonDatabaseService;
 import sample.enums.Category;
 import sample.enums.Importance;
-import sample.objects.ToDoObject;
 import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
+import sample.users.User;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Controller
 {
@@ -64,6 +51,8 @@ public class Controller
     private TextField taskName;
     @FXML
     private TextField searchUser;
+    @FXML
+    private TextField groupName;
 
     @FXML
     private ListView<String> grouplist;
@@ -103,6 +92,10 @@ public class Controller
     private Pane addPane;
     @FXML
     private Pane invitePane;
+    @FXML
+    private Pane createGroupPane;
+    @FXML
+    private Pane acceptDeclinePane;
 
     @FXML
     private DatePicker deadlinePicker;
@@ -133,6 +126,13 @@ public class Controller
     private TableColumn<ToDoObject, Date> columnDeadline;
     @FXML
     private TableColumn<ToDoObject, CheckBox> columnFinished;
+
+    @FXML
+    private TableView<Invite> InviteTable;
+    @FXML
+    private TableColumn<Invite, User> inviteFromUserColumn;
+    @FXML
+    private TableColumn<Invite, Group> inviteToGroupColumn;
 
     @FXML
     private TableView<Group> groupTable;
@@ -551,6 +551,21 @@ public class Controller
         invitePane.setDisable(true);
         invitePane.setVisible(false);
         //TODO invite
+        //System.out.println(grouplist.getSelectionModel().getSelectedIndex());
+        ArrayList<Group> myGroups;
+        int selected = -1;
+        String invitedusername = "";
+        try
+        {
+            myGroups = sds.getAllGroupByUserId(slum.getUserid());
+            selected = grouplist.getSelectionModel().getSelectedIndex();
+            invitedusername = searchUser.getText();
+            sds.createInvite(slum.getUserid(), myGroups.get(selected).getId(), sds.getUser(invitedusername).getUserid());
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+        }
     }
 
     public void cancelInviteButtonEvent(MouseEvent mouseEvent)
@@ -558,5 +573,73 @@ public class Controller
         defaultVBox.setDisable(false);
         invitePane.setDisable(true);
         invitePane.setVisible(false);
+    }
+
+    public void invitePplButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(true);
+        invitePane.setDisable(false);
+        invitePane.setVisible(true);
+
+        ArrayList<Group> myGroups;
+
+        try
+        {
+             myGroups = sds.getAllGroupByUserId(slum.getUserid());
+             ObservableList<String> oblst =  FXCollections.observableArrayList();;
+             for(int i = 0; i < myGroups.size(); i++)
+             {
+                 oblst.add(myGroups.get(i).getName());
+             }
+             grouplist.setItems(oblst);
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+        }
+    }
+
+    public void toAddGroupButton(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(true);
+        createGroupPane.setDisable(false);
+        createGroupPane.setVisible(true);
+    }
+
+    public void cancelCreateGroupButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        createGroupPane.setDisable(true);
+        createGroupPane.setVisible(false);
+    }
+
+    public void createGroupsInPaneButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        createGroupPane.setDisable(true);
+        createGroupPane.setVisible(false);
+
+        if(!groupName.getText().isEmpty())
+        {
+            try {
+                sds.createGroup(slum.getUserid(), groupName.getText());
+            }
+            catch (Exception e)
+            {
+                System.err.println("ERR");
+            }
+        }
+    }
+
+    public void acceptInviteButtonEvent(MouseEvent mouseEvent)
+    {
+    }
+
+    public void backFromInviteButtonEvent(MouseEvent mouseEvent)
+    {
+    }
+
+    public void declineInviteButtonEvent(MouseEvent mouseEvent)
+    {
     }
 }

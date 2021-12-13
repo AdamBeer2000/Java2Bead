@@ -88,6 +88,19 @@
 {
     -fx-background-color: #33363C;
 }
+#invitePane
+{
+    -fx-background-color: #33363C;
+}
+#createGroupPane
+{
+    -fx-background-color: #33363C;
+}
+
+#acceptDeclinePane
+{
+    -fx-background-color: #33363C;
+}
 
 .date-picker
 {

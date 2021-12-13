@@ -248,6 +248,16 @@
                         <Font size="22.0" />
                      </font>
                   </Text>
+                  <Button fx:id="invitePplButton" layoutX="934.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#invitePplButtonEvent" prefHeight="69.0" prefWidth="157.0" text="Invite">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addGroupButton" layoutX="695.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#toAddGroupButton" prefHeight="69.0" prefWidth="220.0" text="Add group">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>
@@ -335,7 +345,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="invitePane" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0">
+      <Pane fx:id="invitePane" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0" visible="false">
          <children>
             <TextField fx:id="searchUser" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="562.0" promptText="Search users">
                <font>
@@ -358,6 +368,60 @@
                   <Font size="22.0" />
                </font>
             </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="createGroupPane" disable="true" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0" visible="false">
+         <children>
+            <TextField fx:id="groupName" layoutX="20.0" layoutY="64.0" prefHeight="53.0" prefWidth="533.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Button fx:id="createGroupBtn" layoutX="567.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#createGroupsInPaneButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Create">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fx:id="groupText" fill="#dcddde" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <Button fx:id="cancelCreateButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#cancelCreateGroupButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="acceptDeclinePane" layoutX="310.0" layoutY="155.0" prefHeight="450.0" prefWidth="700.0">
+         <children>
+            <Button fx:id="acceptInviteButton" layoutX="512.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#acceptInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Accept">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backFromInvite" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#backFromInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Back">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="acceptInviteButton1" layoutX="512.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#declineInviteButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Decline">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fx:id="groupText1" fill="#dcddde" layoutX="512.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invites">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <TableView fx:id="InviteTable" layoutX="16.0" layoutY="14.0" prefHeight="355.0" prefWidth="422.0">
+              <columns>
+                <TableColumn fx:id="inviteFromUserColumn" prefWidth="208.0" text="Invite from" />
+                <TableColumn fx:id="inviteToGroupColumn" prefWidth="213.0" text="Group" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>
