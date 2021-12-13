@@ -248,6 +248,16 @@
                         <Font size="22.0" />
                      </font>
                   </Text>
+                  <Button fx:id="invitePplButton" layoutX="934.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#invitePplButtonEvent" prefHeight="69.0" prefWidth="157.0" text="Invite">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addGroupButton" layoutX="695.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#toAddGroupButton" prefHeight="69.0" prefWidth="220.0" text="Add group">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>
@@ -335,7 +345,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="invitePane" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0">
+      <Pane fx:id="invitePane" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0" visible="false">
          <children>
             <TextField fx:id="searchUser" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="562.0" promptText="Search users">
                <font>
