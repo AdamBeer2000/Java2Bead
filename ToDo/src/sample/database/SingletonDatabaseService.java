@@ -97,6 +97,8 @@ public class SingletonDatabaseService
 
         stmt.executeUpdate();
     }
+
+
     //egy todoobijektumot módosít az adatbázisban
     public void modifyTodo(int todoId,ToDoObject modifiedTodo)throws SQLException
     {
@@ -351,10 +353,10 @@ public class SingletonDatabaseService
         stmt.execute();
     }
 
-    public ArrayList<User> getAllUser() throws SQLException
+    public ArrayList<User> searchUsers(String username) throws SQLException
     {
         ArrayList<User> users=new ArrayList<User>();
-        String sql="SELECT userid,username FROM users";
+        String sql="SELECT userid,username FROM users where username="+username;
         PreparedStatement stmt=getConnection().prepareStatement(sql);
         ResultSet rst=stmt.executeQuery();
 
@@ -428,7 +430,7 @@ public class SingletonDatabaseService
                 //TodoBuilder tb=new TodoBuilder();
                 //todo átírni builderre
 
-                currGroup.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+                currGroup.associatedTodos.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
             }
         }
         return groups;
@@ -480,7 +482,7 @@ public class SingletonDatabaseService
 
                 boolean is_finished=rstSecond.getBoolean("finished");
 
-                currGroup.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+                currGroup.associatedTodos.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
             }
         }
         return assiciates;
