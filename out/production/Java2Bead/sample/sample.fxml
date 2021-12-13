@@ -253,6 +253,11 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Button>
+                  <Button fx:id="addGroupButton" layoutX="695.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#toAddGroupButton" prefHeight="69.0" prefWidth="220.0" text="Add group">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>
@@ -361,6 +366,30 @@
             <Button fx:id="cancelInviteButton" layoutX="481.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#cancelInviteButtonEvent" text="Cancel">
                <font>
                   <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="createGroupPane" disable="true" layoutX="300.0" layoutY="145.0" prefHeight="450.0" prefWidth="700.0" visible="false">
+         <children>
+            <TextField fx:id="groupName" layoutX="20.0" layoutY="64.0" prefHeight="53.0" prefWidth="533.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Button fx:id="createGroupBtn" layoutX="567.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#createGroupsInPaneButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Create">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fx:id="groupText" fill="#dcddde" layoutX="20.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <Button fx:id="cancelCreateButton" layoutX="16.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#cancelCreateGroupButtonEvent" prefHeight="53.0" prefWidth="119.0" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Button>
          </children>

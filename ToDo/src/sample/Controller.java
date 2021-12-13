@@ -49,6 +49,8 @@ public class Controller
     private TextField taskName;
     @FXML
     private TextField searchUser;
+    @FXML
+    private TextField groupName;
 
     @FXML
     private ListView<String> grouplist;
@@ -88,6 +90,8 @@ public class Controller
     private Pane addPane;
     @FXML
     private Pane invitePane;
+    @FXML
+    private Pane createGroupPane;
 
     @FXML
     private DatePicker deadlinePicker;
@@ -549,7 +553,7 @@ public class Controller
         }
         catch (Exception e)
         {
-
+            System.err.println("ERR");
         }
     }
 
@@ -580,10 +584,39 @@ public class Controller
         }
         catch (Exception e)
         {
-
+            System.err.println("ERR");
         }
     }
 
-    public void toAddGroupButton(MouseEvent mouseEvent) {
+    public void toAddGroupButton(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(true);
+        createGroupPane.setDisable(false);
+        createGroupPane.setVisible(true);
+    }
+
+    public void cancelCreateGroupButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        createGroupPane.setDisable(true);
+        createGroupPane.setVisible(false);
+    }
+
+    public void createGroupsInPaneButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        createGroupPane.setDisable(true);
+        createGroupPane.setVisible(false);
+
+        if(!groupName.getText().isEmpty())
+        {
+            try {
+                sds.createGroup(slum.getUserid(), groupName.getText());
+            }
+            catch (Exception e)
+            {
+                System.err.println("ERR");
+            }
+        }
     }
 }
