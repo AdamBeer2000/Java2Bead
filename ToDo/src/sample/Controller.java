@@ -642,4 +642,17 @@ public class Controller
     public void declineInviteButtonEvent(MouseEvent mouseEvent)
     {
     }
+
+    public void dataToInviteTable(ObservableList<Invite> tableDataset)
+    {
+        try {
+            for(int i = 0; i < InviteTable.getItems().size(); i++)
+            {
+                InviteTable.getItems().remove(InviteTable.getItems().get(i));
+            }
+            InviteTable.setItems(tableDataset);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
