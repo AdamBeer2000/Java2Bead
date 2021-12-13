@@ -3,8 +3,10 @@ package sample.database;
 import sample.enums.Category;
 import sample.enums.Importance;
 import sample.groups.Group;
+import sample.groups.Invite;
 import sample.objects.ToDoObject;
 import sample.objects.TodoBuilder;
+import sample.users.SingletonLoggedUserManager;
 import sample.users.User;
 
 import java.sql.*;
@@ -365,6 +367,82 @@ public class SingletonDatabaseService
             users.add(new User(rst.getString("username"),rst.getInt("userid")));
         }
         return users;
+    }
+    //invitek lekérdezése user id vel
+    public ArrayList<Invite> getInvitesByUserId(int userId) throws SQLException
+    {
+        ArrayList<Invite> invites=new ArrayList<>();
+        String sql="SELECT inviteruser.id as 'inviteruserId',inviteruser.username as 'inviteruserUsername',\n" +
+                    "       grups.grupId,grups.grupname\n" +
+                    "FROM invites\n" +
+                    "JOIN users as inviteruser on invites.inviterId = inviteruser.id\n" +
+                    "JOIN users as inviteduser on invites.invitedId = inviteduser.id\n" +
+                    "JOIN grups on invites.grupId=grups.grupid\n" +
+                    "where inviteduser.id=?";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,userId);
+        ResultSet rs=stmt.executeQuery();
+        while (rs.next())
+        {
+            invites.add(new Invite(rs.getString("inviteruserUsername"),rs.getInt("inviteruserId"),
+                        rs.getString("grupId"),rs.getInt("grupname\t\n")));
+        }
+        return invites;
+    }
+    //invitek lekérdezése bejelentkezett userel
+    public ArrayList<Invite> getInvitesOffLoggedUser()throws SQLException
+    {
+        SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+        return getInvitesByUserId(slum.getUserid());
+    }
+
+    //egy felhasználó meghívása id vel
+    public void createInvite(int inviterId,int groupId,int invitedId)throws SQLException
+    {
+        String sql="INSERT INTO invites(inviterId,grupId,invitedId) VALUES(?,?,?)";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,inviterId);
+        stmt.setInt(2,groupId);
+        stmt.setInt(3,invitedId);
+        stmt.execute();
+    }
+    //ha nem adjuk meg ki fogadja el az invitet alapból a bejelentkezet user lessz
+
+    public void acceptInvite(int inviteId)throws SQLException
+    {
+        String sql="SELECT * FROM invites WHERE inviteId=?";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,inviteId);
+        ResultSet rs=stmt.executeQuery();
+        rs.next();
+        int groupId =rs.getInt("groupId");
+        SingletonLoggedUserManager slum= SingletonLoggedUserManager.getInstance();
+        addUserToGroup(slum.getUserid(),groupId);
+    }
+
+    public void acceptInvite(int invitedId ,int inviteId)throws SQLException
+    {
+        String sql="SELECT * FROM invites WHERE inviteId=?";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,inviteId);
+        ResultSet rs=stmt.executeQuery();
+        rs.next();
+        int groupId =rs.getInt("groupId");
+        addUserToGroup(invitedId,groupId);
+        deleteInvite(inviteId);
+    }
+
+    public void declineInvite(int inviteId)throws SQLException
+    {
+        deleteInvite(inviteId);
+    }
+
+    private void deleteInvite(int inviteId) throws SQLException
+    {
+        String sql="DELETE FROM invites WHERE inviteId=?";
+        PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setInt(1,inviteId);
+        stmt.execute();
     }
 
     //létrahoz egy csoportot és hozáadja a készítőt
