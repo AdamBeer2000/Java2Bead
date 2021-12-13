@@ -619,4 +619,16 @@ public class Controller
             }
         }
     }
+
+    public void acceptInviteButtonEvent(MouseEvent mouseEvent)
+    {
+    }
+
+    public void backFromInviteButtonEvent(MouseEvent mouseEvent)
+    {
+    }
+
+    public void declineInviteButtonEvent(MouseEvent mouseEvent)
+    {
+    }
 }
