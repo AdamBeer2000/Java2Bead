@@ -665,6 +665,16 @@ public class Controller
 
     public void letMeSeemyInvitesButtonEvent(MouseEvent mouseEvent)
     {
+        try
+        {
+            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+            e.printStackTrace();
+        }
+
         defaultVBox.setDisable(true);
         acceptDeclinePane.setDisable(false);
         acceptDeclinePane.setVisible(true);

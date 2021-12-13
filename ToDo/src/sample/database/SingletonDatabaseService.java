@@ -387,7 +387,7 @@ public class SingletonDatabaseService
         while (rs.next())
         {
             invites.add(new Invite(rs.getInt("inviteid"),rs.getString("inviteruserUsername"),rs.getInt("inviteruserId"),
-                        rs.getString("grupId"),rs.getInt("grupname\t\n")));
+                        rs.getString("grupname"),rs.getInt("grupId")));
         }
         return invites;
     }
