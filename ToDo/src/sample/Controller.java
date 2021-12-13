@@ -153,6 +153,8 @@ public class Controller
 
         groupTableColumn_Group.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        inviteFromUserColumn.setCellValueFactory(new PropertyValueFactory<>("---"));
+        inviteToGroupColumn.setCellValueFactory(new PropertyValueFactory<>("---"));
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
