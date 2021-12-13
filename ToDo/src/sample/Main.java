@@ -36,9 +36,6 @@ public class Main extends Application {
     {
         try
         {
-            SingletonLoggedUserManager slum =SingletonLoggedUserManager.getInstance();
-            slum.loginUser("Béla","123456789");
-            sds.acceptInvite(3);
             launch(args);
         }
         catch (Exception e)
