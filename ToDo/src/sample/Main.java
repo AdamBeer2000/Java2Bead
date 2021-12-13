@@ -10,6 +10,7 @@ import sample.enums.Category;
 import sample.enums.Importance;
 import sample.groups.Group;
 import sample.objects.ToDoObject;
+import sample.users.SingletonLoggedUserManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
