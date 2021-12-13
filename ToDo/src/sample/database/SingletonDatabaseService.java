@@ -424,7 +424,7 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery();
         rs.next();
         int groupId=-1;
-        while(rs.next()) groupId =rs.getInt("grupId");
+        groupId =rs.getInt("inviteId");
         addUserToGroup(invitedId,groupId);
         deleteInvite(inviteId);
     }

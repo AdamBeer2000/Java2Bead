@@ -567,6 +567,7 @@ public class Controller
         catch (Exception e)
         {
             System.err.println("ERR");
+            e.printStackTrace();
         }
     }
 
