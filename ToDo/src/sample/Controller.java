@@ -65,6 +65,8 @@ public class Controller
 
     @FXML
     private TextArea description;
+    @FXML
+    private TextArea todoDesc;
 
     @FXML
     private Pane loginUsernamePN;
@@ -88,8 +90,6 @@ public class Controller
     private Pane innerBtnPane4;
     @FXML
     private Pane innerBtnPane5;
-    @FXML
-    private Pane innerBtnPaneX;
     @FXML
     private Pane loginPane;
     @FXML
@@ -346,11 +346,19 @@ public class Controller
     }
 
     @FXML
-    public void clickGroupTableCell(MouseEvent event)
+    public void ClickGroupTableCell(MouseEvent event)
     {
-        if (event.getClickCount() == 2) //Checking double click
+        if (event.getClickCount() == 2)
         {
             dataToTable(FXCollections.observableArrayList(groupTable.getSelectionModel().getSelectedItem().associatedTodos));
+        }
+    }
+
+    public void ClickMainTableCell(MouseEvent event)
+    {
+        if (event.getClickCount() == 1)
+        {
+            todoDesc.setText(mainTable.getSelectionModel().getSelectedItem().description);
         }
     }
 
@@ -528,6 +536,5 @@ public class Controller
         innerBtnPane3.setStyle("-fx-background-color: #2F3136");
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
-        innerBtnPaneX.setStyle("-fx-background-color: #2F3136");
     }
 }
