@@ -153,6 +153,8 @@ public class Controller
 
         groupTableColumn_Group.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        inviteFromUserColumn.setCellValueFactory(new PropertyValueFactory<>("---"));
+        inviteToGroupColumn.setCellValueFactory(new PropertyValueFactory<>("---"));
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -665,6 +667,16 @@ public class Controller
 
     public void letMeSeemyInvitesButtonEvent(MouseEvent mouseEvent)
     {
+        try
+        {
+            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
+        }
+        catch (Exception e)
+        {
+            System.err.println("ERR");
+            e.printStackTrace();
+        }
+
         defaultVBox.setDisable(true);
         acceptDeclinePane.setDisable(false);
         acceptDeclinePane.setVisible(true);
