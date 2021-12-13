@@ -643,6 +643,7 @@ public class Controller
             selected = InviteTable.getSelectionModel().getSelectedIndex();
             invites = sds.getInvitesOffLoggedUser();
             sds.acceptInvite(invites.get(selected).getInviteId());
+            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
         }
         catch (Exception e)
         {
@@ -667,6 +668,7 @@ public class Controller
             selected = InviteTable.getSelectionModel().getSelectedIndex();
             invites = sds.getInvitesOffLoggedUser();
             sds.declineInvite(invites.get(selected).getInviteId());
+            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
         }
         catch (Exception e)
         {
