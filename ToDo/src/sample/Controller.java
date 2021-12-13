@@ -62,6 +62,11 @@ public class Controller
     private TextField signinEmail;
     @FXML
     private TextField taskName;
+    @FXML
+    private TextField searchUser;
+
+    @FXML
+    private ListView<String> grouplist;
 
     @FXML
     private TextArea description;
@@ -96,6 +101,8 @@ public class Controller
     private Pane bannerPane;
     @FXML
     private Pane addPane;
+    @FXML
+    private Pane invitePane;
 
     @FXML
     private DatePicker deadlinePicker;
@@ -529,5 +536,20 @@ public class Controller
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         innerBtnPaneX.setStyle("-fx-background-color: #2F3136");
+    }
+
+    public void inviteButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        invitePane.setDisable(true);
+        invitePane.setVisible(false);
+        //TODO invite
+    }
+
+    public void cancelInviteButtonEvent(MouseEvent mouseEvent)
+    {
+        defaultVBox.setDisable(false);
+        invitePane.setDisable(true);
+        invitePane.setVisible(false);
     }
 }
