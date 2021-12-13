@@ -358,8 +358,9 @@ public class SingletonDatabaseService
     public ArrayList<User> searchUsers(String username) throws SQLException
     {
         ArrayList<User> users=new ArrayList<User>();
-        String sql="SELECT userid,username FROM users where username="+username;
+        String sql="SELECT userid,username FROM users where username like %?%";
         PreparedStatement stmt=getConnection().prepareStatement(sql);
+        stmt.setString(1,username);
         ResultSet rst=stmt.executeQuery();
 
         while (rst.next())
@@ -368,11 +369,12 @@ public class SingletonDatabaseService
         }
         return users;
     }
+
     //invitek lekérdezése user id vel
     public ArrayList<Invite> getInvitesByUserId(int userId) throws SQLException
     {
         ArrayList<Invite> invites=new ArrayList<>();
-        String sql="SELECT inviteruser.id as 'inviteruserId',inviteruser.username as 'inviteruserUsername',\n" +
+        String sql="SELECT  inviteid,inviteruser.id as 'inviteruserId',inviteruser.username as 'inviteruserUsername',\n" +
                     "       grups.grupId,grups.grupname\n" +
                     "FROM invites\n" +
                     "JOIN users as inviteruser on invites.inviterId = inviteruser.id\n" +
@@ -384,7 +386,7 @@ public class SingletonDatabaseService
         ResultSet rs=stmt.executeQuery();
         while (rs.next())
         {
-            invites.add(new Invite(rs.getString("inviteruserUsername"),rs.getInt("inviteruserId"),
+            invites.add(new Invite(rs.getInt("inviteid"),rs.getString("inviteruserUsername"),rs.getInt("inviteruserId"),
                         rs.getString("grupId"),rs.getInt("grupname\t\n")));
         }
         return invites;
