@@ -16,6 +16,8 @@ import sample.groups.Invite;
 import sample.objects.ToDoObject;
 
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -440,7 +442,17 @@ public class Controller
 
     public void clickTodoDayPicker(ActionEvent actionEvent)
     {
-        System.out.println(todoDayPicker.getValue());
+        if(todoDayPicker.getValue() != null)
+        {
+            Instant instant = Instant.from(todoDayPicker.getValue().atStartOfDay(ZoneId.systemDefault()));
+            Date date= Date.from(instant);
+            try {
+                ObservableList todos = FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdandDate(slum.getUserid(),date));
+                dataToTable(todos);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
@@ -644,6 +656,7 @@ public class Controller
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         handleCategoryChange(Category.TODAY);
+        todoDayPicker.setValue(null);
     }
 
     public void plannedTasks(MouseEvent mouseEvent)
@@ -654,6 +667,7 @@ public class Controller
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         handleCategoryChange(Category.PLANNED);
+        todoDayPicker.setValue(null);
     }
 
     public void unfinishedTasks(MouseEvent mouseEvent)
@@ -664,6 +678,7 @@ public class Controller
         innerBtnPane1.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         handleCategoryChange(Category.UNFINISHED);
+        todoDayPicker.setValue(null);
     }
 
     public void finishedtasks(MouseEvent mouseEvent)
@@ -674,6 +689,7 @@ public class Controller
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane1.setStyle("-fx-background-color: #2F3136");
         handleCategoryChange(Category.FINISHED);
+        todoDayPicker.setValue(null);
     }
 
     public void allTasks(MouseEvent mouseEvent)
@@ -684,6 +700,7 @@ public class Controller
         innerBtnPane4.setStyle("-fx-background-color: #2F3136");
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
         handleCategoryChange(Category.NOLABEL);
+        todoDayPicker.setValue(null);
     }
 
     public void setInnerButtonActivityColor()
