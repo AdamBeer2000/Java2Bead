@@ -180,6 +180,7 @@ public class Controller
                         mainTable.getItems().remove(row.getItem());
                         try {
                             sds.TService().deleteTodo(row.getItem().todoId);
+                            refreshUI();
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
@@ -272,6 +273,17 @@ public class Controller
         );
         t_line.setCycleCount(Animation.INDEFINITE);
         t_line.play();
+    }
+
+    public void refreshUI()
+    {
+        try {
+            dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
+            groupTable.setItems(observableArrayList(sds.SService().getAllGroupByUserId(slum.getUserid())));
+            todoDesc.setText("");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void TypeSearchUser(KeyEvent keyEvent)
@@ -399,13 +411,7 @@ public class Controller
                     }
                     builder.withCategory(currentCategory);
                     sds.TService().addTodoToGroup(slum.getUserid(), groupToAddTodo.getId(), builder.Build());
-                    try
-                    {
-                        handleCategoryChange(currentCategory);
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+                    refreshUI();
                     defaultVBox.setDisable(false);
                     addPane.setDisable(true);
                     addPane.setVisible(false);
@@ -445,6 +451,8 @@ public class Controller
                     //todo fail
                 }
             }
+
+            isGroupTodo = false;
         }
     }
 
@@ -716,20 +724,6 @@ public class Controller
         defaultVBox.setDisable(false);
         invitePane.setDisable(true);
         invitePane.setVisible(false);
-    }
-
-    public void invitePplButtonEvent(MouseEvent mouseEvent)
-    {
-        ArrayList<Group> myGroups;
-
-        try
-        {
-
-        }
-        catch (Exception e)
-        {
-            System.err.println("ERR");
-        }
     }
 
     public void toAddGroupButton(MouseEvent mouseEvent)
