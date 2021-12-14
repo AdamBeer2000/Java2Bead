@@ -36,16 +36,25 @@ public class TodoService extends Service
     }
     public ArrayList<ToDoObject> getAllTodoByUserIdToday(int userid)throws SQLException
     {
+        return getAllTodoByUserIdandDate(userid,new java.util.Date());
+    }
+    public ArrayList<ToDoObject> getAllTodoByUserIdandDate(int userid,java.util.Date date)throws SQLException
+    {
         Connection conn =getConnection();
         ArrayList<ToDoObject> ret=new ArrayList<>();
 
         String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid " +
                 "from todotable " +
-                "where ownerid=? and deadline=CURRENT_DATE()"+" and finished=false";
+                "where ownerid=? and deadline=?"+" and finished=false";
 
         PreparedStatement stmt= conn.prepareStatement(query);
+
         stmt.setInt(1,userid);
-        //stmt.setDate(2,new java.sql.Date(date.getTime()));
+
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        stmt.setDate(2,sqlDate);
+
+        System.out.println("query");
         ResultSet rs=stmt.executeQuery();
         while (rs.next())
         {
@@ -223,10 +232,10 @@ public class TodoService extends Service
         return ret;
     }
     //lekéri az összes todoját egy usernek két időpont között
-    public ArrayList<ToDoObject> getAllTodoByUserIdBetween(int userid, Date dateOne, Date dateTwo)throws SQLException
-    {
-        return new ArrayList<ToDoObject>();
-    }
+    //public ArrayList<ToDoObject> getAllTodoByUserIdBetween(int userid, Date dateOne, Date dateTwo)throws SQLException
+    //{
+    //    return new ArrayList<ToDoObject>();
+    //}
     //egy todoobijektumot add hozzá az adatbázishoz
     public void addTodoToUser(int userid, ToDoObject todo)throws SQLException
     {
