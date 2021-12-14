@@ -39,6 +39,8 @@ public class Main extends Application {
         {
             //SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
             //slum.loginUser("TesztElek","123");
+            //sds.SService().leaveGroup(4);
+
             //TodoBuilder tb=new TodoBuilder("AddTODroupTest","AddTODroupTest");
             //sds.SService().addTodoToGroup(slum.getUserid(),1,tb.Build());
 

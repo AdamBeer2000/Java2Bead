@@ -193,6 +193,22 @@ public class SocialService extends Service
 
         stmt.executeUpdate();
     }
+    //csoportból törlés
+    private  void deleteFromGroup(int userId,int groupId)throws SQLException
+    {
+        Connection conn=getConnection();
+        String query="DELETE FROM grupmembers WHERE userid=? and grupid=?";
+        PreparedStatement  stmt= conn.prepareStatement(query);
+        stmt.setInt(1,userId);
+        stmt.setInt(2,groupId);
+        stmt.execute();
+    }
+    //csoportbol kilépés
+    public void leaveGroup(int groupId)throws SQLException
+    {
+        SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+        deleteFromGroup(slum.getUserid(),groupId);
+    }
 
     //Invites
 
