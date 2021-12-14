@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -138,6 +139,12 @@ public class Controller
     private TableView<Group> groupTable;
     @FXML
     private TableColumn<Group, String> groupTableColumn_Group;
+
+    @FXML
+    private Button acceptInviteButton;
+
+    @FXML
+    private Button declineInviteButton;
 
     private Category currentCategory = Category.NOLABEL;
 
@@ -368,6 +375,15 @@ public class Controller
         if (event.getClickCount() == 1)
         {
             todoDesc.setText(mainTable.getSelectionModel().getSelectedItem().description);
+        }
+    }
+
+    public void ClickInviteTableCell(MouseEvent event)
+    {
+        if(InviteTable.getSelectionModel().getSelectedItem() != null)
+        {
+            acceptInviteButton.setDisable(false);
+            declineInviteButton.setDisable(false);
         }
     }
 
@@ -641,9 +657,13 @@ public class Controller
         try
         {
             selected = InviteTable.getSelectionModel().getSelectedIndex();
-            invites = sds.SService().getInvitesOffLoggedUser();
-            sds.SService().acceptInvite(invites.get(selected).getInviteId());
-            dataToInviteTable(FXCollections.observableArrayList(sds.SService().getInvitesOffLoggedUser()));
+            if(selected != -1)
+            {
+                invites = sds.SService().getInvitesOffLoggedUser();
+                sds.SService().acceptInvite(invites.get(selected).getInviteId());
+                dataToInviteTable(FXCollections.observableArrayList(sds.SService().getInvitesOffLoggedUser()));
+                groupTable.setItems(FXCollections.observableArrayList(sds.SService().getAllGroupByUserId(slum.getUserid())));
+            }
         }
         catch (Exception e)
         {
