@@ -431,6 +431,7 @@ public class Controller
                         builder.withDeadLine(deadlinePicker.getValue());
                     }
                     builder.withCategory(currentCategory);
+                    builder.withStartDate(new Date());
                     sds.TService().addTodoToUser(slum.getUserid(),builder.Build());
                     try
                     {
