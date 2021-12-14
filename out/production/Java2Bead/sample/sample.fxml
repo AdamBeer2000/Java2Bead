@@ -22,7 +22,7 @@
 
 <Pane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
+      <Pane fx:id="loginPane" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <Line endY="640.0" layoutX="740.0" layoutY="40.0" stroke="#202225" />
             <Button fx:id="loginButton" layoutX="808.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#loginButtonEvent" prefHeight="78.0" prefWidth="404.0" text="Login">
@@ -126,7 +126,7 @@
             <Pane fx:id="signinPasswordPN" layoutX="399.0" layoutY="168.0" prefHeight="3.0" prefWidth="258.0" />
          </children>
       </Pane>
-      <VBox fx:id="defaultVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+      <VBox fx:id="defaultVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
             <MenuBar fx:id="menuBar">
               <menus>
@@ -230,7 +230,7 @@
                      <children>
                         <TextArea fx:id="todoDesc" editable="false" prefHeight="528.0" prefWidth="300.0" wrapText="true" />
                         <DatePicker fx:id="todoDayPicker" layoutX="14.0" layoutY="557.0" onAction="#clickTodoDayPicker" />
-                        <Label layoutX="14.0" layoutY="536.0" text="Todos On Day:" textFill="#dcddde">
+                        <Label layoutX="14.0" layoutY="536.0" text="Show Todos that finish on day:" textFill="#dcddde">
                            <font>
                               <Font size="15.0" />
                            </font>
