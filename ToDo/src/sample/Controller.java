@@ -1,15 +1,12 @@
 package sample;
 
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import sample.database.SingletonDatabaseService;
 import sample.groups.Group;
 import sample.groups.Invite;
@@ -29,7 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import sample.enums.Category;
-import sample.enums.Importance;
 import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
 import sample.users.User;
