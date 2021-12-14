@@ -410,6 +410,7 @@ public class Controller
                         builder.withDeadLine(deadlinePicker.getValue());
                     }
                     builder.withCategory(currentCategory);
+                    builder.withCategory(currentCategory);
                     sds.TService().addTodoToGroup(slum.getUserid(), groupToAddTodo.getId(), builder.Build());
                     refreshUI();
                     defaultVBox.setDisable(false);
