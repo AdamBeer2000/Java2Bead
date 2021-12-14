@@ -46,7 +46,6 @@ public class TodoService extends Service
         PreparedStatement stmt= conn.prepareStatement(query);
         stmt.setInt(1,userid);
         //stmt.setDate(2,new java.sql.Date(date.getTime()));
-        System.out.println("query");
         ResultSet rs=stmt.executeQuery();
         while (rs.next())
         {

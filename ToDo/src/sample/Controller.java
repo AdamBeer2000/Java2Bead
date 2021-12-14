@@ -107,6 +107,8 @@ public class Controller
 
     @FXML
     private DatePicker deadlinePicker;
+    @FXML
+    private DatePicker todoDayPicker;
 
     @FXML
     private Text clock;
@@ -309,6 +311,22 @@ public class Controller
 
     public void dataToTable(ObservableList<ToDoObject> tableDataset)
     {
+        for(ToDoObject o : tableDataset)
+        {
+            o.is_finished_checked.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                o.is_finished = o.is_finished_checked.isSelected() ?  true : false;
+                ToDoObject newTodo = o;
+                SingletonDatabaseService sds = SingletonDatabaseService.getInstance();
+                try {
+                    sds.TService().modifyTodo(o.todoId, newTodo);
+                    handleCategoryChange(currentCategory);
+                }catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            });
+        }
+
         try {
             for(int i = 0; i < mainTable.getItems().size(); i++)
             {
@@ -418,6 +436,11 @@ public class Controller
                 //todo fail
             }
         }
+    }
+
+    public void clickTodoDayPicker(ActionEvent actionEvent)
+    {
+        System.out.println(todoDayPicker.getValue());
     }
 
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
