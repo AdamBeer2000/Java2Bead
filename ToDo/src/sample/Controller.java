@@ -482,7 +482,6 @@ public class Controller
         }
         else if(slum.loginUser(loginUsername.getText(),loginPassword.getText()))
         {
-            setPopup("-fx-background-color: #008000", "Successful login!");
             loginPane.setVisible(false);
             loginPane.setDisable(true);
             defaultVBox.setDisable(false);
@@ -491,6 +490,9 @@ public class Controller
             try {
                 dataToTable(observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
                 groupTable.setItems(observableArrayList(sds.SService().getAllGroupByUserId(slum.getUserid())));
+
+                String msg = "You have " + sds.TService().getAllTodoByUserIdToday(slum.getUserid()).size() + " tasks today!";
+                setPopup("-fx-background-color: #008000", msg);
             }catch (Exception e)
             {
                 e.printStackTrace();
