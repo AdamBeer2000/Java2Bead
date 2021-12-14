@@ -232,6 +232,10 @@ public class Controller
             {
                 dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdandDate(slum.getUserid(),new Date())));
             }
+            if(currentCategory==Category.FINISHED)
+            {
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndFinished(slum.getUserid())));
+            }
             else
             {
                 dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));

@@ -43,7 +43,7 @@ public class TodoService extends Service
 
         String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid " +
                 "from todotable " +
-                "where ownerid=? and deadline=?";
+                "where ownerid=? and deadline=?"+" and finished=false";
 
         PreparedStatement stmt= conn.prepareStatement(query);
         stmt.setInt(1,userid);
@@ -80,7 +80,8 @@ public class TodoService extends Service
         Connection conn =getConnection();
         ArrayList<ToDoObject> ret=new ArrayList<>();
 
-        String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid from todotable where ownerid="+userid;
+        String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid " +
+                     "from todotable where ownerid="+userid+" and finished=false";
 
         Statement stmt= conn.createStatement();
 
@@ -117,7 +118,7 @@ public class TodoService extends Service
 
         String query=
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
-                        " FROM todotable" + " WHERE ownerid="+userid+" and importanceid="+imp.ToInt();
+                        " FROM todotable" + " WHERE ownerid="+userid+" and importanceid="+imp.ToInt()+" and finished=false";;
 
         Statement stmt= conn.createStatement();
 
@@ -154,12 +155,52 @@ public class TodoService extends Service
 
         String query=
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
-                        " FROM todotable" + " WHERE ownerid="+userid+" and categoryid="+cat.ToInt();
+                        " FROM todotable" + " WHERE ownerid="+userid+" and categoryid="+cat.ToInt()+" and finished=false";
 
         System.out.println(query);
         Statement stmt= conn.createStatement();
 
         ResultSet rs=stmt.executeQuery(query);
+        while (rs.next())
+        {
+            int todoId=rs.getInt("todoid");
+
+            Importance importance;
+            int impid=rs.getInt("importanceid");
+            importance=Importance.IntToImportance(impid);
+
+            Category category;
+            int catid=rs.getInt("categoryid");
+            category=Category.IntToCategory(catid);
+
+            String title=rs.getString("title");
+            String description=rs.getString("description");
+
+            java.util.Date deadline=rs.getDate("deadline");
+            java.util.Date start_date=rs.getDate("start_date");
+
+            boolean is_finished=rs.getBoolean("finished");
+
+            ret.add(new ToDoObject(todoId,title,description,start_date,deadline,category,importance,is_finished));
+
+        }
+        return ret;
+    }
+    public ArrayList<ToDoObject> getAllTodoByUserIdAndFinished(int userid)throws SQLException
+    {
+        Connection conn =getConnection();
+        ArrayList<ToDoObject> ret=new ArrayList<>();
+
+        String query=
+                "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
+                        " FROM todotable" + " WHERE ownerid=? and finished=?";
+
+        System.out.println(query);
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.setInt(1,userid);
+        stmt.setBoolean(2,true);
+
+        ResultSet rs=stmt.executeQuery();
         while (rs.next())
         {
             int todoId=rs.getInt("todoid");
