@@ -118,17 +118,6 @@ public class Controller
     private Text popupMessage;
 
     @FXML
-    private RadioButton radioMostImp;
-    @FXML
-    private RadioButton radioImp;
-    @FXML
-    private RadioButton radioLessImp;
-    @FXML
-    private RadioButton radioAvg;
-    @FXML
-    private RadioButton radioNotImp;
-
-    @FXML
     private TableView<ToDoObject> mainTable;
     @FXML
     private TableColumn<ToDoObject, String> columnName;
@@ -377,60 +366,15 @@ public class Controller
         description.setText("");
     }
 
-    public void mostImpRadio(ActionEvent actionEvent)
-    {
-        radioImp.setSelected(false);
-        radioLessImp.setSelected(false);
-        radioNotImp.setSelected(false);
-        radioAvg.setSelected(false);
-    }
-
-    public void impRadio(ActionEvent actionEvent)
-    {
-        radioMostImp.setSelected(false);
-        radioLessImp.setSelected(false);
-        radioNotImp.setSelected(false);
-        radioAvg.setSelected(false);
-    }
-
-    public void notImpRadio(ActionEvent actionEvent)
-    {
-        radioImp.setSelected(false);
-        radioLessImp.setSelected(false);
-        radioMostImp.setSelected(false);
-        radioAvg.setSelected(false);
-    }
-
-    public void avgRadio(ActionEvent actionEvent)
-    {
-        radioImp.setSelected(false);
-        radioLessImp.setSelected(false);
-        radioNotImp.setSelected(false);
-        radioMostImp.setSelected(false);
-    }
-
-    public void lessImpRadio(ActionEvent actionEvent)
-    {
-        radioImp.setSelected(false);
-        radioMostImp.setSelected(false);
-        radioNotImp.setSelected(false);
-        radioAvg.setSelected(false);
-    }
-
     public void addTodoButtonEvent(MouseEvent mouseEvent)
     {
         Importance imp = Importance.NOLABEL;
         if(!taskName.getText().isEmpty())
         {
-            if(radioMostImp.isSelected()) imp = Importance.MOST_IMPORTANT;
-            if(radioImp.isSelected()) imp = Importance.IMPORTANT;
-            if(radioLessImp.isSelected()) imp = Importance.LESS_IMPORTANT;
-            if(radioAvg.isSelected()) imp = Importance.AVARAGE_IMPORTANT;
-            if(radioNotImp.isSelected()) imp = Importance.NOT_IMPORTANT;
 
             try
             {
-                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText()); //TODO: importance hozzáadása, amennyiben nem null, a checker fv még nincs kész
+                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
                 if(deadlinePicker.getValue()!=null)
                 {
                     builder.withDeadLine(deadlinePicker.getValue());
@@ -450,12 +394,6 @@ public class Controller
                 addPane.setVisible(false);
                 bannerPane.setVisible(false);
                 bannerPane.setDisable(true);
-
-                radioImp.setSelected(false);
-                radioLessImp.setSelected(false);
-                radioNotImp.setSelected(false);
-                radioMostImp.setSelected(false);
-                radioAvg.setSelected(false);
 
             }catch (Exception e)
             {
@@ -482,12 +420,6 @@ public class Controller
 
     public void cancelAddTodoButtonEvent(MouseEvent mouseEvent)
     {
-        radioImp.setSelected(false);
-        radioLessImp.setSelected(false);
-        radioNotImp.setSelected(false);
-        radioMostImp.setSelected(false);
-        radioAvg.setSelected(false);
-
         defaultVBox.setDisable(false);
         addPane.setDisable(true);
         addPane.setVisible(false);
