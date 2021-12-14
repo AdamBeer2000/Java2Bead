@@ -185,3 +185,29 @@
 {
     -fx-opacity: 0;
 }
+
+.list-cell
+{
+    -fx-background-color: linear-gradient(#202225 0%, #33363C 100%);
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:selected
+{
+    -fx-background-color: #202225;
+}
+
+.list-cell:even
+{
+    -fx-background-color: #33363C;
+}
+
+.list-cell:odd
+{
+    -fx-background-color: #33363C;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #51555C;
+    -fx-text-fill: white;
+}
