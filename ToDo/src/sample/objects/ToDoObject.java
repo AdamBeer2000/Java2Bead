@@ -31,17 +31,6 @@ public class ToDoObject
         if (this.is_finished) {
             this.is_finished_checked.fire();
         }
-        is_finished_checked.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            is_finished = is_finished_checked.isSelected() ?  true : false;
-            ToDoObject newTodo = this;
-            SingletonDatabaseService sds = SingletonDatabaseService.getInstance();
-            try {
-                sds.TService().modifyTodo(todoId, newTodo);
-            }catch (SQLException e)
-            {
-                e.printStackTrace();
-            }
-        });
     }
 
     //---- [CONSTRUCTORS] ----
