@@ -37,7 +37,7 @@ public class SingletonLoggedUserManager
         SingletonDatabaseService sds=SingletonDatabaseService.getInstance();
         try
         {
-            loggedUser=sds.getUser(userName,password);
+            loggedUser=sds.UService().getUser(userName,password);
             return true;
         }catch (Exception e) {
             e.printStackTrace();

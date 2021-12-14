@@ -36,7 +36,7 @@ public class ToDoObject
             ToDoObject newTodo = this;
             SingletonDatabaseService sds = SingletonDatabaseService.getInstance();
             try {
-                sds.modifyTodo(todoId, newTodo);
+                sds.TService().modifyTodo(todoId, newTodo);
             }catch (SQLException e)
             {
                 e.printStackTrace();

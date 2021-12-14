@@ -172,15 +172,15 @@ public class Controller
         try {
             if(currentCategory == Category.NOLABEL)
             {
-                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
             }
             if(currentCategory == Category.TODAY)
             {
-                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdandDate(slum.getUserid(),new Date())));
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdandDate(slum.getUserid(),new Date())));
             }
             else
             {
-                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
             }
         }catch(Exception e)
         {
@@ -273,14 +273,14 @@ public class Controller
                 }
                 builder.withImportance(imp);
                 builder.withCategory(currentCategory);
-                sds.addTodoToUser(slum.getUserid(),builder.Build());
+                sds.TService().addTodoToUser(slum.getUserid(),builder.Build());
                 try {
                     if(currentCategory != Category.NOLABEL)
                     {
-                        dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
+                        dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
                     }else
                     {
-                        dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+                        dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
                     }
                 }catch (Exception e)
                 {
@@ -340,8 +340,8 @@ public class Controller
             defaultVBox.setVisible(true);
 
             try {
-                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
-                groupTable.setItems(FXCollections.observableArrayList(sds.getAllGroupByUserId(slum.getUserid())));
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
+                groupTable.setItems(FXCollections.observableArrayList(sds.SService().getAllGroupByUserId(slum.getUserid())));
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -375,7 +375,7 @@ public class Controller
     {
         try
         {
-            sds.addUser(signinUsername.getText(),signinPassword.getText(),signinEmail.getText());
+            sds.UService().addUser(signinUsername.getText(),signinPassword.getText(),signinEmail.getText());
             slum.loginUser(signinUsername.getText(),signinPassword.getText());
             setPopup("-fx-background-color: #008000", "Successful sign in!");
             loginPane.setVisible(false);
@@ -383,7 +383,7 @@ public class Controller
             defaultVBox.setDisable(false);
             defaultVBox.setVisible(true);
             try {
-                dataToTable(FXCollections.observableArrayList(sds.getAllTodoByUserId(slum.getUserid())));
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -559,10 +559,10 @@ public class Controller
         String invitedusername = "";
         try
         {
-            myGroups = sds.getAllGroupByUserId(slum.getUserid());
+            myGroups = sds.SService().getAllGroupByUserId(slum.getUserid());
             selected = grouplist.getSelectionModel().getSelectedIndex();
             invitedusername = searchUser.getText();
-            sds.createInvite(slum.getUserid(), myGroups.get(selected).getId(), sds.getUser(invitedusername).getUserid());
+            sds.SService().createInvite(slum.getUserid(), myGroups.get(selected).getId(), sds.UService().getUser(invitedusername).getUserid());
         }
         catch (Exception e)
         {
@@ -588,7 +588,7 @@ public class Controller
 
         try
         {
-             myGroups = sds.getAllGroupByUserId(slum.getUserid());
+             myGroups = sds.SService().getAllGroupByUserId(slum.getUserid());
              ObservableList<String> oblst =  FXCollections.observableArrayList();;
              for(int i = 0; i < myGroups.size(); i++)
              {
@@ -625,7 +625,7 @@ public class Controller
         if(!groupName.getText().isEmpty())
         {
             try {
-                sds.createGroup(slum.getUserid(), groupName.getText());
+                sds.SService().createGroup(slum.getUserid(), groupName.getText());
             }
             catch (Exception e)
             {
@@ -641,9 +641,9 @@ public class Controller
         try
         {
             selected = InviteTable.getSelectionModel().getSelectedIndex();
-            invites = sds.getInvitesOffLoggedUser();
-            sds.acceptInvite(invites.get(selected).getInviteId());
-            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
+            invites = sds.SService().getInvitesOffLoggedUser();
+            sds.SService().acceptInvite(invites.get(selected).getInviteId());
+            dataToInviteTable(FXCollections.observableArrayList(sds.SService().getInvitesOffLoggedUser()));
         }
         catch (Exception e)
         {
@@ -666,9 +666,9 @@ public class Controller
         try
         {
             selected = InviteTable.getSelectionModel().getSelectedIndex();
-            invites = sds.getInvitesOffLoggedUser();
-            sds.declineInvite(invites.get(selected).getInviteId());
-            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
+            invites = sds.SService().getInvitesOffLoggedUser();
+            sds.SService().declineInvite(invites.get(selected).getInviteId());
+            dataToInviteTable(FXCollections.observableArrayList(sds.SService().getInvitesOffLoggedUser()));
         }
         catch (Exception e)
         {
@@ -696,7 +696,7 @@ public class Controller
     {
         try
         {
-            dataToInviteTable(FXCollections.observableArrayList(sds.getInvitesOffLoggedUser()));
+            dataToInviteTable(FXCollections.observableArrayList(sds.SService().getInvitesOffLoggedUser()));
         }
         catch (Exception e)
         {
