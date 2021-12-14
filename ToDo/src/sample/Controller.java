@@ -179,6 +179,31 @@ public class Controller
         inviteFromUserColumn.setCellValueFactory(new PropertyValueFactory<>("InviterName"));
         inviteToGroupColumn.setCellValueFactory(new PropertyValueFactory<>("GroupName"));
 
+        mainTable.setRowFactory(
+                tableView -> {
+                    final TableRow<ToDoObject> row = new TableRow<>();
+                    final ContextMenu rowMenu = new ContextMenu();
+                    MenuItem deleteItem = new MenuItem("Delete");
+                    deleteItem.setOnAction(event -> {
+                        mainTable.getItems().remove(row.getItem());
+                        try {
+                            sds.TService().deleteTodo(row.getItem().todoId);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    rowMenu.getItems().addAll(deleteItem);
+
+                    // only display context menu for non-empty rows:
+                    row.contextMenuProperty().bind(
+                            Bindings.when(row.emptyProperty())
+                                    .then((ContextMenu) null)
+                                    .otherwise(rowMenu));
+                    return row;
+                }
+        );
+
         groupTable.setRowFactory(
             tableView -> {
                 final TableRow<Group> row = new TableRow<>();

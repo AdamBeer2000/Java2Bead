@@ -34,6 +34,18 @@ public class TodoService extends Service
         stmt.executeUpdate();
 
     }
+
+    public void deleteTodo(int todoId)throws SQLException
+    {
+        Connection conn =getConnection();
+
+        String query="DELETE FROM todotable " +
+                "WHERE todoId="+todoId;
+
+        PreparedStatement stmt= conn.prepareStatement(query);
+        stmt.execute();
+
+    }
     public ArrayList<ToDoObject> getAllTodoByUserIdToday(int userid)throws SQLException
     {
         return getAllTodoByUserIdandDate(userid,new java.util.Date());
