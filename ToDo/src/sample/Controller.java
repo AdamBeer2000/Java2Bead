@@ -747,4 +747,12 @@ public class Controller
         acceptDeclinePane.setDisable(false);
         acceptDeclinePane.setVisible(true);
     }
+
+    public void logoutEvent(ActionEvent actionEvent)
+    {
+        loginPane.setVisible(true);
+        loginPane.setDisable(false);
+        defaultVBox.setDisable(true);
+        defaultVBox.setVisible(false);
+    }
 }
