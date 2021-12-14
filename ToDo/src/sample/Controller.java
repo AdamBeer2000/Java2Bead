@@ -224,19 +224,20 @@ public class Controller
     {
         currentCategory = category;
         try {
-            if(currentCategory == Category.NOLABEL)
-            {
-                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
-            }
+
             if(currentCategory == Category.TODAY)
             {
-                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdandDate(slum.getUserid(),new Date())));
-            }
-            if(currentCategory==Category.FINISHED)
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdToday(slum.getUserid())));
+            }else if(currentCategory==Category.FINISHED)
             {
-                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndFinished(slum.getUserid())));
-            }
-            else
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndFinished(slum.getUserid(),true)));
+            }else if(currentCategory==Category.UNFINISHED)
+            {
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndFinished(slum.getUserid(),false)));
+            }else if(currentCategory == Category.NOLABEL)
+            {
+                dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
+            }else
             {
                 dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
             }
@@ -332,14 +333,9 @@ public class Controller
                 builder.withImportance(imp);
                 builder.withCategory(currentCategory);
                 sds.TService().addTodoToUser(slum.getUserid(),builder.Build());
-                try {
-                    if(currentCategory != Category.NOLABEL)
-                    {
-                        dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserIdAndCategory(slum.getUserid(), currentCategory)));
-                    }else
-                    {
-                        dataToTable(FXCollections.observableArrayList(sds.TService().getAllTodoByUserId(slum.getUserid())));
-                    }
+                try
+                {
+                    handleCategoryChange(currentCategory);
                 }catch (Exception e)
                 {
                     e.printStackTrace();

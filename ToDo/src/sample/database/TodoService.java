@@ -23,8 +23,6 @@ public class TodoService extends Service
                 "SET title=?,importanceid=?,categoryid=?,description=?,finished=? "+
                 "WHERE todoId="+todoId;
 
-        System.out.println(query);
-
         PreparedStatement stmt= conn.prepareStatement(query);
 
         stmt.setString(1,modifiedTodo.title);
@@ -36,19 +34,19 @@ public class TodoService extends Service
         stmt.executeUpdate();
 
     }
-    public ArrayList<ToDoObject> getAllTodoByUserIdandDate(int userid, java.util.Date date)throws SQLException
+    public ArrayList<ToDoObject> getAllTodoByUserIdToday(int userid)throws SQLException
     {
         Connection conn =getConnection();
         ArrayList<ToDoObject> ret=new ArrayList<>();
 
         String query="SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid " +
                 "from todotable " +
-                "where ownerid=? and deadline=?"+" and finished=false";
+                "where ownerid=? and deadline=CURRENT_DATE()"+" and finished=false";
 
         PreparedStatement stmt= conn.prepareStatement(query);
         stmt.setInt(1,userid);
-        stmt.setDate(2,new java.sql.Date(date.getTime()));
-
+        //stmt.setDate(2,new java.sql.Date(date.getTime()));
+        System.out.println("query");
         ResultSet rs=stmt.executeQuery();
         while (rs.next())
         {
@@ -156,8 +154,6 @@ public class TodoService extends Service
         String query=
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
                         " FROM todotable" + " WHERE ownerid="+userid+" and categoryid="+cat.ToInt()+" and finished=false";
-
-        System.out.println(query);
         Statement stmt= conn.createStatement();
 
         ResultSet rs=stmt.executeQuery(query);
@@ -186,7 +182,7 @@ public class TodoService extends Service
         }
         return ret;
     }
-    public ArrayList<ToDoObject> getAllTodoByUserIdAndFinished(int userid)throws SQLException
+    public ArrayList<ToDoObject> getAllTodoByUserIdAndFinished(int userid,boolean isFinished)throws SQLException
     {
         Connection conn =getConnection();
         ArrayList<ToDoObject> ret=new ArrayList<>();
@@ -195,10 +191,11 @@ public class TodoService extends Service
                 "SELECT title,importanceid,categoryid,description,deadline,start_date,finished,todoid" +
                         " FROM todotable" + " WHERE ownerid=? and finished=?";
 
-        System.out.println(query);
+
         PreparedStatement stmt= conn.prepareStatement(query);
+
         stmt.setInt(1,userid);
-        stmt.setBoolean(2,true);
+        stmt.setBoolean(2,isFinished);
 
         ResultSet rs=stmt.executeQuery();
         while (rs.next())
