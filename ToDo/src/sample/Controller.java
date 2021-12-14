@@ -754,6 +754,9 @@ public class Controller
 
     public void logoutEvent(ActionEvent actionEvent)
     {
-        //TODO logout
+        loginPane.setVisible(true);
+        loginPane.setDisable(false);
+        defaultVBox.setDisable(true);
+        defaultVBox.setVisible(false);
     }
 }
