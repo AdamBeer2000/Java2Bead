@@ -750,6 +750,7 @@ public class Controller
         {
             try {
                 sds.SService().createGroup(slum.getUserid(), groupName.getText());
+                refreshUI();
             }
             catch (Exception e)
             {
