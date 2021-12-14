@@ -1,16 +1,21 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import sample.database.SingletonDatabaseService;
 import sample.groups.Group;
 import sample.groups.Invite;
 import sample.objects.ToDoObject;
+
+import java.sql.SQLException;
 import java.util.Date;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -162,6 +167,48 @@ public class Controller
 
         inviteFromUserColumn.setCellValueFactory(new PropertyValueFactory<>("InviterName"));
         inviteToGroupColumn.setCellValueFactory(new PropertyValueFactory<>("GroupName"));
+
+        groupTable.setRowFactory(
+            tableView -> {
+                final TableRow<Group> row = new TableRow<>();
+                final ContextMenu rowMenu = new ContextMenu();
+                MenuItem removeItem = new MenuItem("Delete");
+                MenuItem inviteItem = new MenuItem("Invite");
+                removeItem.setOnAction(event -> {
+                    groupTable.getItems().remove(row.getItem());
+                    try {
+                        sds.SService().leaveGroup(row.getItem().getId());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
+                inviteItem.setOnAction(event -> {
+                    defaultVBox.setDisable(true);
+                    invitePane.setDisable(false);
+                    invitePane.setVisible(true);
+//                    String invitedusername = "";
+//                    try
+//                    {
+//                        invitedusername = searchUser.getText();
+//                        sds.SService().createInvite(slum.getUserid(), row.getItem().getId(), sds.UService().getUser(invitedusername).getUserid());
+//                    }
+//                    catch (Exception e)
+//                    {
+//                        System.err.println("ERR");
+//                        e.printStackTrace();
+//                    }
+                });
+
+                rowMenu.getItems().addAll(removeItem, inviteItem);
+
+                // only display context menu for non-empty rows:
+                row.contextMenuProperty().bind(
+                        Bindings.when(row.emptyProperty())
+                                .then((ContextMenu) null)
+                                .otherwise(rowMenu));
+                return row;
+            }
+        );
 
         Timeline t_line = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime currentTime = LocalTime.now();
@@ -364,7 +411,7 @@ public class Controller
     @FXML
     public void ClickGroupTableCell(MouseEvent event)
     {
-        if (event.getClickCount() == 2)
+        if (event.getClickCount() == 2 && groupTable.getSelectionModel().getSelectedItem() != null)
         {
             dataToTable(FXCollections.observableArrayList(groupTable.getSelectionModel().getSelectedItem().associatedTodos));
         }
@@ -372,7 +419,7 @@ public class Controller
 
     public void ClickMainTableCell(MouseEvent event)
     {
-        if (event.getClickCount() == 1)
+        if (event.getClickCount() == 1 && mainTable.getSelectionModel().getSelectedItem() != null)
         {
             todoDesc.setText(mainTable.getSelectionModel().getSelectedItem().description);
         }
@@ -563,30 +610,6 @@ public class Controller
         innerBtnPane5.setStyle("-fx-background-color: #2F3136");
     }
 
-    public void inviteButtonEvent(MouseEvent mouseEvent)
-    {
-        defaultVBox.setDisable(false);
-        invitePane.setDisable(true);
-        invitePane.setVisible(false);
-        //TODO invite
-        //System.out.println(grouplist.getSelectionModel().getSelectedIndex());
-        ArrayList<Group> myGroups;
-        int selected = -1;
-        String invitedusername = "";
-        try
-        {
-            myGroups = sds.SService().getAllGroupByUserId(slum.getUserid());
-            selected = grouplist.getSelectionModel().getSelectedIndex();
-            invitedusername = searchUser.getText();
-            sds.SService().createInvite(slum.getUserid(), myGroups.get(selected).getId(), sds.UService().getUser(invitedusername).getUserid());
-        }
-        catch (Exception e)
-        {
-            System.err.println("ERR");
-            e.printStackTrace();
-        }
-    }
-
     public void cancelInviteButtonEvent(MouseEvent mouseEvent)
     {
         defaultVBox.setDisable(false);
@@ -596,10 +619,6 @@ public class Controller
 
     public void invitePplButtonEvent(MouseEvent mouseEvent)
     {
-        defaultVBox.setDisable(true);
-        invitePane.setDisable(false);
-        invitePane.setVisible(true);
-
         ArrayList<Group> myGroups;
 
         try
