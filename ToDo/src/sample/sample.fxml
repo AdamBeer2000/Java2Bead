@@ -70,7 +70,7 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <TextField fx:id="signinEmail" layoutX="75.0" layoutY="251.0" onKeyReleased="#signinEmailReleaseEvent" prefHeight="53.0" prefWidth="582.0" promptText="template.email@gmal.com">
+            <TextField fx:id="signinEmail" layoutX="75.0" layoutY="251.0" onKeyReleased="#signinEmailReleaseEvent" prefHeight="53.0" prefWidth="582.0" promptText="template.email@gmail.com">
                <font>
                   <Font size="20.0" />
                </font>
