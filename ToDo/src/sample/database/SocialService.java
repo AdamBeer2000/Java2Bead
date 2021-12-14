@@ -153,10 +153,47 @@ public class SocialService extends Service
         }
         return assiciates;
     }
-    public void addTodoToGroup(int groupId,ToDoObject TObj)
+    public void addTodoToGroup(int creatorId,int groupId,ToDoObject todo) throws SQLException
     {
+        Connection conn =getConnection();
 
+        ArrayList<ToDoObject> ret=new ArrayList<>();
+
+        String query="";
+
+        query="INSERT INTO todotable(ownerid,title,importanceid,categoryid,description,finished,start_date,deadline,grupid) "+
+                "VALUES(?,?,?,?,?,?,?,?,?)";
+
+        PreparedStatement  stmt= conn.prepareStatement(query);
+
+        stmt.setInt(1,creatorId);
+        stmt.setString(2,todo.title);
+        stmt.setInt(3,todo.importance.ToInt());
+        stmt.setInt(4,todo.category.ToInt());
+        stmt.setString(5,todo.description);
+        stmt.setBoolean(6,todo.is_finished);
+        stmt.setInt(9,groupId);
+        if(todo.start_date!=null)
+        {
+            stmt.setDate(7,new java.sql.Date(todo.start_date.getTime()));
+        }
+        else
+        {
+            stmt.setDate(7,null);
+        }
+
+        if(todo.deadline!=null)
+        {
+            stmt.setDate(8,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(8,null);
+        }
+
+        stmt.executeUpdate();
     }
+
     //Invites
 
     //invitek lekérdezése user id vel

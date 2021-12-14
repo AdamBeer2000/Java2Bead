@@ -10,6 +10,7 @@ import sample.enums.Category;
 import sample.enums.Importance;
 import sample.groups.Group;
 import sample.objects.ToDoObject;
+import sample.objects.TodoBuilder;
 import sample.users.SingletonLoggedUserManager;
 
 import java.sql.Connection;
@@ -36,6 +37,11 @@ public class Main extends Application {
     {
         try
         {
+            //SingletonLoggedUserManager slum=SingletonLoggedUserManager.getInstance();
+            //slum.loginUser("TesztElek","123");
+            //TodoBuilder tb=new TodoBuilder("AddTODroupTest","AddTODroupTest");
+            //sds.SService().addTodoToGroup(slum.getUserid(),1,tb.Build());
+
             launch(args);
         }
         catch (Exception e)
