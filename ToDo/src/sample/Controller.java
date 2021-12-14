@@ -751,4 +751,9 @@ public class Controller
         acceptDeclinePane.setDisable(false);
         acceptDeclinePane.setVisible(true);
     }
+
+    public void logoutEvent(ActionEvent actionEvent)
+    {
+        //TODO logout
+    }
 }
