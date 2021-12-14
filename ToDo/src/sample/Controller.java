@@ -479,7 +479,6 @@ public class Controller
     {
         if(loginUsername.getText().isEmpty()||loginPassword.getText().isEmpty())
         {
-            //todo kirni hogy üres x
             setPopup("-fx-background-color: #FF0000", "Missing Username or Password!");
         }
         else if(slum.loginUser(loginUsername.getText(),loginPassword.getText()))
@@ -502,7 +501,6 @@ public class Controller
         }
         else
         {
-            //todo sikertelen bejelentkezés
             setPopup("-fx-background-color: #FF0000", "Login failed!");
         }
     }
@@ -552,7 +550,6 @@ public class Controller
             }
         }catch (Exception e)
         {
-            //todo fail
             setPopup("-fx-background-color: #FF0000", "Sign in failed!");
         }
 
@@ -852,5 +849,20 @@ public class Controller
         loginPane.setDisable(false);
         defaultVBox.setDisable(true);
         defaultVBox.setVisible(false);
+
+        loginUsername.setText("");
+        loginPassword.setText("");
+        signinUsername.setText("");
+        signinPassword.setText("");
+        signinEmail.setText("");
+        taskName.setText("");
+        searchUser.setText("");
+        groupName.setText("");
+
+        loginUsernamePN.setStyle("-fx-background-color: #33363C");
+        loginPasswordPN.setStyle("-fx-background-color: #33363C");
+        signinUsernamePN.setStyle("-fx-background-color: #33363C");
+        signinPasswordPN.setStyle("-fx-background-color: #33363C");
+        signinEmailPN.setStyle("-fx-background-color: #33363C");
     }
 }
