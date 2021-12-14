@@ -243,12 +243,46 @@ public class TodoService extends Service
         }
         return ret;
     }
-    //lekéri az összes todoját egy usernek két időpont között
-    //public ArrayList<ToDoObject> getAllTodoByUserIdBetween(int userid, Date dateOne, Date dateTwo)throws SQLException
-    //{
-    //    return new ArrayList<ToDoObject>();
-    //}
-    //egy todoobijektumot add hozzá az adatbázishoz
+
+    public void addTodoToGroup(int userid, int groupId, ToDoObject todo)throws SQLException
+    {
+        Connection conn =getConnection();
+        ArrayList<ToDoObject> ret=new ArrayList<>();
+
+        String query="INSERT INTO todotable(ownerid,grupid,title,importanceid,categoryid,description,finished,start_date,deadline) "+
+                    "VALUES(?,?,?,?,?,?,?,?,?)";
+
+        PreparedStatement  stmt= conn.prepareStatement(query);
+
+        stmt.setInt(1,userid);
+        stmt.setInt(2,groupId);
+        stmt.setString(3,todo.title);
+        stmt.setInt(4,todo.importance.ToInt());
+        stmt.setInt(5,todo.category.ToInt());
+        stmt.setString(6,todo.description);
+        stmt.setBoolean(7,todo.is_finished);
+
+        if(todo.start_date!=null)
+        {
+            stmt.setDate(8,new java.sql.Date(todo.start_date.getTime()));
+        }
+        else
+        {
+            stmt.setDate(8,null);
+        }
+
+        if(todo.deadline!=null)
+        {
+            stmt.setDate(9,new java.sql.Date(todo.deadline.getTime()));
+        }
+        else
+        {
+            stmt.setDate(9,null);
+        }
+
+        stmt.executeUpdate();
+    }
+
     public void addTodoToUser(int userid, ToDoObject todo)throws SQLException
     {
         Connection conn =getConnection();

@@ -152,6 +152,9 @@ public class Controller
     private Category currentCategory = Category.NOLABEL;
 
     private Group groupToInvite;
+    private Group groupToAddTodo;
+
+    private boolean isGroupTodo = false;
 
     @FXML
     public void initialize()
@@ -197,8 +200,24 @@ public class Controller
             tableView -> {
                 final TableRow<Group> row = new TableRow<>();
                 final ContextMenu rowMenu = new ContextMenu();
+                MenuItem addItem = new MenuItem("Add Todo");
                 MenuItem removeItem = new MenuItem("Leave");
                 MenuItem inviteItem = new MenuItem("Invite");
+                addItem.setOnAction(event -> {
+                    isGroupTodo = true;
+
+                    defaultVBox.setDisable(true);
+                    addPane.setDisable(false);
+                    addPane.setVisible(true);
+                    bannerPane.setVisible(true);
+                    bannerPane.setDisable(false);
+
+                    taskName.setText("");
+                    description.setText("");
+
+                    groupToAddTodo = row.getItem();
+                });
+
                 removeItem.setOnAction(event -> {
                     groupTable.getItems().remove(row.getItem());
                     try {
@@ -234,7 +253,7 @@ public class Controller
                     }
                 });
 
-                rowMenu.getItems().addAll(removeItem, inviteItem);
+                rowMenu.getItems().addAll(addItem, removeItem, inviteItem);
 
                 // only display context menu for non-empty rows:
                 row.contextMenuProperty().bind(
@@ -368,37 +387,63 @@ public class Controller
 
     public void addTodoButtonEvent(MouseEvent mouseEvent)
     {
-        Importance imp = Importance.NOLABEL;
         if(!taskName.getText().isEmpty())
         {
-
-            try
+            if(isGroupTodo)
             {
-                TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
-                if(deadlinePicker.getValue()!=null)
-                {
-                    builder.withDeadLine(deadlinePicker.getValue());
-                }
-                builder.withImportance(imp);
-                builder.withCategory(currentCategory);
-                sds.TService().addTodoToUser(slum.getUserid(),builder.Build());
-                try
-                {
-                    handleCategoryChange(currentCategory);
-                }catch (Exception e)
+                try{
+                    TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
+                    if(deadlinePicker.getValue()!=null)
+                    {
+                        builder.withDeadLine(deadlinePicker.getValue());
+                    }
+                    builder.withCategory(currentCategory);
+                    sds.TService().addTodoToGroup(slum.getUserid(), groupToAddTodo.getId(), builder.Build());
+                    try
+                    {
+                        handleCategoryChange(currentCategory);
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    defaultVBox.setDisable(false);
+                    addPane.setDisable(true);
+                    addPane.setVisible(false);
+                    bannerPane.setVisible(false);
+                    bannerPane.setDisable(true);
+                }catch(SQLException e)
                 {
                     e.printStackTrace();
                 }
-                defaultVBox.setDisable(false);
-                addPane.setDisable(true);
-                addPane.setVisible(false);
-                bannerPane.setVisible(false);
-                bannerPane.setDisable(true);
-
-            }catch (Exception e)
+            }else
             {
-                e.printStackTrace();
-                //todo fail
+                try
+                {
+                    TodoBuilder builder=new TodoBuilder(taskName.getText(),description.getText());
+                    if(deadlinePicker.getValue()!=null)
+                    {
+                        builder.withDeadLine(deadlinePicker.getValue());
+                    }
+                    builder.withCategory(currentCategory);
+                    sds.TService().addTodoToUser(slum.getUserid(),builder.Build());
+                    try
+                    {
+                        handleCategoryChange(currentCategory);
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    defaultVBox.setDisable(false);
+                    addPane.setDisable(true);
+                    addPane.setVisible(false);
+                    bannerPane.setVisible(false);
+                    bannerPane.setDisable(true);
+
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    //todo fail
+                }
             }
         }
     }
