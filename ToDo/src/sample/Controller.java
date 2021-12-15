@@ -774,6 +774,10 @@ public class Controller
                 sds.SService().acceptInvite(invites.get(selected).getInviteId());
                 dataToInviteTable(observableArrayList(sds.SService().getInvitesOffLoggedUser()));
                 groupTable.setItems(observableArrayList(sds.SService().getAllGroupByUserId(slum.getUserid())));
+
+                defaultVBox.setDisable(true);
+                acceptDeclinePane.setDisable(false);
+                acceptDeclinePane.setVisible(true);
             }
         }
         catch (Exception e)
