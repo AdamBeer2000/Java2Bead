@@ -407,6 +407,7 @@ public class Controller
                     }
                     builder.withCategory(currentCategory);
                     builder.withCategory(currentCategory);
+                    builder.withStartDate(new Date());
                     sds.TService().addTodoToGroup(slum.getUserid(), groupToAddTodo.getId(), builder.Build());
                     refreshUI();
                     defaultVBox.setDisable(false);
